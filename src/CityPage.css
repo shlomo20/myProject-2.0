@@ -1,0 +1,10 @@
+.cityF{
+    color: #fbfbfb;
+    display: flex;
+    margin: 10px;
+    border-bottom: 1px solid;
+}
+.dayI{
+    margin: 10px;
+    padding: 5px;
+}

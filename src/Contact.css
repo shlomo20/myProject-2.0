@@ -1,0 +1,106 @@
+
+#contact{
+    background-image: url("./assets/img/backg.jpg");
+    background-size: 100% 100%;
+    background-repeat: no-repeat;
+    overflow: hidden;
+}
+.git{
+    margin: 15px;
+    font-size: 3.5em;
+    color: #fff;
+    position: absolute;
+    left: 50px;
+    
+}
+.iconOwn{
+    background-image: URL('./assets/img/profile-pic.png');
+    height: 30px;
+    width: 30px;
+    background-size: 100% 30px;
+    margin-right: 10px;
+}
+.feed{
+    margin-top: 150px;
+}
+.sec{
+    margin: 0 auto;
+    margin-top: 20em;
+    margin-bottom: 150px;
+    padding: 30px;
+    background: rgba(255, 255, 255, 0.26);
+    box-shadow: 0 25px 45px rgba(0, 0, 0, 0.1);
+    border: 1px solid rgba(255, 255, 255, 0.5);
+    border-radius: 10px;
+    width: fit-content;
+}
+.info{
+    margin-bottom: 35px;
+    font-size: 1.5em;
+}
+.nameBox{
+    display: flex; 
+    font-weight: 600;
+}
+.git2{
+    font-weight: 900;
+    font-size: 2em;
+    margin-bottom: 30px;
+}
+.input{
+    border-radius: 7px;
+    padding: 7px;
+    margin: 5px;
+    width: 16em;
+    margin-bottom: 20px;
+}
+.reasons{
+    font-weight: 900; 
+    margin-right: 44px; 
+    margin-left: 20px;
+}
+.reason{
+    border-radius: 7px;
+    padding: 7px;
+    width: 16em;
+}
+.msg{
+    /*width: 34em;*/
+    height: 118px;
+    border-radius: 10px;
+    padding: 10px;
+    width: 98%
+}
+.formsubmit_id{
+    display:none;
+}
+.button{
+    border-radius: 7px;
+    padding: 10px;
+    width: 40mm;
+    margin: 20px;
+    margin-left: 20em;
+}
+a{
+    color: rgba(0, 255, 13, 0.637);
+}
+@media only screen and (max-device-width: 750px) {
+    #contact{background-size: 253% 129%;
+        background-position-x: -475px;
+        background-position-y: -241px;}
+    
+    .git{left: 10px; font-size: 2em;}
+    .feed{
+        font-size: 0.6em;
+        margin-top: 61px;
+    }
+    .sec{
+        margin-top: 20em;
+        margin-bottom: 20px;
+        padding: 10px;
+    }
+    .sec2{
+        width: 22em;
+    }
+    .button{margin-left: 12em;}
+}

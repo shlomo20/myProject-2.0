@@ -1,6 +1,5 @@
 import React,{useState, useEffect} from 'react';
 import{BrowserRouter as Router,Routes, Switch,Route}from'react-router-dom';
-import ScriptTag from 'react-script-tag';
 import './App.css';
 import Nav from './Nav';
 import HomePage from './main'
@@ -88,14 +87,6 @@ function App() {
         })
       )
   }
-
-
-  
-  const Demo = props => (
-  <ScriptTag type="text/javascript" src="/path/to/resource.js" />
-  )
-
-
   return (
     <>
       <Router>

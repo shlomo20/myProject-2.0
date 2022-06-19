@@ -46,7 +46,7 @@ export default function CityPage(props)
     }
 
     return(
-        <section>
+        <section id="ba">
             <div className='box'>
                 <div className='cityF'>   
                     {forecast}

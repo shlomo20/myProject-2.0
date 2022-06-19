@@ -27,7 +27,7 @@ import merge from "lodash/merge"
   })  
 
   return(
-    <div>  
+    <div className='main'>  
      {weatherDataEl}
     </div>
   );

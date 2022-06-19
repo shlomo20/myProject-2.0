@@ -1,4 +1,9 @@
 {"Cities" :[ 
-        { "name": "Williamsburg", "info": 222, "zip": "11249", "country": "us", "page": "1" }
+        { "name": "Williamsburg", "info": 222, "zip": "11249", "country": "us", "page": "1" },
+        { "name": "Borough Park", "info": 222, "zip": "11219", "country": "us", "page": "2" },
+        { "name": "Monroe", "info": 333, "zip": "10950", "country": "us", "page": "3" },
+        { "name": "Monsey", "info": 444, "zip": "10952", "country": "us", "page": "4" },
+        { "name": "Lakewood", "info": 555, "zip": "08701", "country": "us", "page": "5" },
+        { "name": "Miami", "info": 555, "zip": "33101", "country": "us", "page": "6"}
         ],
         "test": []}   

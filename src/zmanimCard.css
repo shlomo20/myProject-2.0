@@ -1,0 +1,73 @@
+.zmanimBox h3 {
+  color: #fff;
+  margin-bottom: 20px;
+  margin-left: 40%;
+}
+.zmanimBox .list {
+  position: relative;
+  display: flex;
+  padding: 10px 0;
+  background: rgba(0, 0, 0, 0.1);
+  border-radius: 10px;
+  margin: 10px 0;
+  cursor: pointer;
+  transition: 0.5s;
+  overflow: hidden;
+}
+.zmanimBox .list:hover {
+  background: #fff;
+  box-shadow: -15px 30px 50px rgba(0, 0, 0, 0.5);
+  transform: scale(1.15) translateX(30px) translateY(-15px);
+  z-index: 1000;
+}
+.zmanimBox .list .imgBox {
+  position: relative;
+ /* width: 0px;
+  height: 0px;*/
+  border-radius: 10px;
+  overflow: hidden;
+  margin: 10px;
+}
+.zmanimBox .list .imgBox img {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+.zmanimBox .list .content {
+  display: flex;
+  flex-direction: row-reverse;
+  justify-content: center;
+  align-items: CENTER;
+  color: #fff;
+}
+.zmanimBox .list .content .rank {
+  position: absolute;
+  right: -50px;
+  color: #03a9f4;
+  transition: 0.5s;
+  font-size: 2em;
+}
+.zmanimBox .list .content .rank .small {
+  font-weight: 500;
+  opacity: 0.5;
+}
+.zmanimBox .list:hover .content .rank {
+  right: 20px;
+}
+.zmanimBox .list .content h4 {
+  line-height: 1.2;
+  font-size: 600;
+  transition: 0.5s;
+}
+.zmanimBox .list .content p {
+  font-size: 0.95em;
+  transition: 0.5s;
+  margin-right: 75px;
+}
+.zmanimBox .list:hover .content h4,
+.zmanimBox .list:hover .content p {
+  color: #333;
+}

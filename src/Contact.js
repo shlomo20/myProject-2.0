@@ -28,7 +28,7 @@ export default function Contact()
                             </div>
                             <div className="q1" >
                                 <label htmlFor="reasons" className="reasons">Reason of Contact </label>
-                                <input className="reason " list="reasons" name="Reason" placeholder="Please choose one"/>
+                                <input className="reason " list="reasons" name="Reason" placeholder="Please choose one"  required/>
                             </div>
                             <div className="list">
                                 <datalist id="reasons">

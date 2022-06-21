@@ -104,16 +104,16 @@
   border-top-left-radius: 20px;
   box-shadow: 0px -10px 0 0 var(--color);
 }
-.nav ul a:nth-child(1).active ~ .indicator {
+.nav ul div:nth-child(1).active ~ .indicator {
   transform: translateX(calc(75px * 0));
 }
-.nav ul a:nth-child(2).active ~ .indicator {
+.nav ul div:nth-child(2).active ~ .indicator {
   transform: translateX(calc(70px * 1));
 }
-.nav ul a:nth-child(3).active ~ .indicator {
+.nav ul div:nth-child(3).active ~ .indicator {
   transform: translateX(calc(70px * 2));
 }
-.nav ul a:nth-child(4).active ~ .indicator {
+.nav ul div:nth-child(4).active ~ .indicator {
   transform: translateX(calc(70px * 2));
 }
 .s {
@@ -127,3 +127,5 @@
   align-items: flex-end;
   
 }
+
+

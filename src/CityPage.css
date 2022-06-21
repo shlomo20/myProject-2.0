@@ -73,3 +73,17 @@
     padding: 20px;
     backdrop-filter: blur(25px);
   }
+
+  @media only screen and (max-width: 600px) {
+    .box{
+      padding: 0px;
+      font-size: 0.3em;
+    }
+    .dayI{
+      margin: 8px;
+      padding: 0px;
+    }
+    .iconI{
+      width: 20px;
+    }
+}

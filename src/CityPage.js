@@ -34,7 +34,7 @@ export default function CityPage(props)
                 <p className='com'>{comment}</p>
                 <p>Max: {max}</p>
                 <p>Min: {min}</p>
-                <img  src={iconURL} alt="" className="icon"/>
+                <img  src={iconURL} alt="" className="iconI"/>
             </div>
         )
     })

@@ -50,7 +50,6 @@ function App() {
       }
     }
     forEach();
-    console.log(cities)
     console.log(tempCities)
     console.log(citiesWeatherData)
   },[tempCities])
@@ -87,6 +86,9 @@ function App() {
         })
       )
   }
+  function searchMe(c){
+    setTempCities([{ "name": null, "info": 222, "zip": c, "country": "us"}])
+  }
   return (
     <>
       <Router>
@@ -96,7 +98,7 @@ function App() {
             cityIsActive={isActive.city}
             ActivateMe={handelActive}/>
         <Routes>
-          <Route path="/*"  element={<HomePage cities={cities} citiesWeatherData={citiesWeatherData}/>}/>
+          <Route path="/*"  element={<HomePage cities={cities} citiesWeatherData={citiesWeatherData} searchMe={searchMe}/>}/>
           <Route path="/about" element={<About/>}/>
           <Route path="/contact" element={<Contact/>}/>
           <Route path='/c/:id' element={<CityPage ActivateMe={handelActive}/>} /> 

@@ -32,7 +32,7 @@ import merge from "lodash/merge"
       const { f } = el.currentConditions.temp;
       const { mile } = el.currentConditions.wind;
       return(
-        <Link key={el.zip} to={`/c/${el.name}`} state={el}><MainCard key={el.zip} cityName={el.name? el.name:el.region} temp={f} icon={iconURL} humidity={humidity} speed={mile} description={comment}/></Link> 
+        <Link key={el.zip} to={`/c/${el.name}`} state={el}><MainCard key={el.zip} cityName={el.name } temp={f} icon={iconURL} humidity={humidity} speed={mile} description={comment}/></Link> 
        )
     }
   })  
@@ -42,8 +42,8 @@ import merge from "lodash/merge"
   function submitSearch (e){
     e.preventDefault();
     function a (){ props.searchMe(searchData.search)};
-    if(onlyNumbers(searchData.search) && searchData.search.length == 5){
-      a();
+    a();
+    if(props.badRequest=== false){
       setError(false)
     }
     else{

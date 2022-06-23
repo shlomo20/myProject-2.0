@@ -33,7 +33,7 @@ function App() {
   useEffect(()=>{
     async function getCityData(c){
       var req = c.zip === null ?c.name:c.zip
-      var res = await fetch('https://websrapjs.vercel.app/dev/data/weather/'+ req )
+      var res = await fetch('https://websrapjs.vercel.app/data/weather/'+ req )
       var data = await res.json()
       setCitiesWeatherData(prev => ([...prev,data]))
       console.log(data);

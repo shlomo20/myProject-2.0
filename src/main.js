@@ -6,8 +6,19 @@ import merge from "lodash/merge"
 
 
  function Main(props){
+ 
+  const [searchData, setSearchData] = React.useState({
+      search:"",
+  })
+  const [error, setError] = React.useState(false)
+  function handelSearchData(e){
+      const {value, name } = e.target;
+      setSearchData(prev =>({
+          ...prev, [name]: value
+      }))
+  }
+  
   var arr3 = [];
-
   for (var i=0; i<props.cities.length; i++) {
       arr3.push(merge(props.cities[i], props.citiesWeatherData[i]));
       
@@ -21,14 +32,39 @@ import merge from "lodash/merge"
       const { f } = el.currentConditions.temp;
       const { mile } = el.currentConditions.wind;
       return(
-        <Link key={el.zip} to={`/c/${el.name}`} state={el}><MainCard key={el.zip} cityName={el.name} temp={f} icon={iconURL} humidity={humidity} speed={mile} description={comment}/></Link> 
+        <Link key={el.zip} to={`/c/${el.name}`} state={el}><MainCard key={el.zip} cityName={el.name } temp={f} icon={iconURL} humidity={humidity} speed={mile} description={comment}/></Link> 
        )
     }
   })  
+  function onlyNumbers(str) {
+    return /^[0-9.,]+$/.test(str);
+  }
+  function submitSearch (e){
+    e.preventDefault();
+    function a (){ props.searchMe(searchData.search)};
+    a();
+    if(props.badRequest=== false){
+      setError(false)
+    }
+    else{
+       setError(true)
+    }
+    setSearchData("")
+  }
 
   return(
     <div className='main'>  
-     {weatherDataEl}
+    <div className="search">
+      <form className='form' onSubmit={submitSearch}>
+      <input type="text" className="search-bar" name="search"  value={searchData.search} placeholder="Search" onChange={handelSearchData} />
+            <button className="button"  type="submit" ><i className="fa fa-search" aria-hidden="true"></i>
+            </button>
+      </form>
+      {error?<div className='error'>We are sorry! but we currently only support search by zipcode, 
+        we are working on adding search by city, please change your search 
+        to a zipcode or double check your zipcode has  5 digits </div>:""}       
+    </div>
+    {weatherDataEl}
     </div>
   );
 }

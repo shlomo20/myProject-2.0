@@ -28,24 +28,25 @@
     flex-wrap: wrap;
     justify-content: center;
   }
+  .form{
+    width: 100%;
+    padding: 25px;
+  }
   .search {
     display: flex;
     align-items: center;
     justify-content: center;
-    margin-top: 50px;
+    border-top: 50px solid #0000;
+    flex-direction: column;
   }
   .button {
-    margin: 0.5em;
-    border-radius: 50%;
     border: none;
-    height: 42px;
-    width: 42px;
-    outline: none;
-    background: #000000d0;
-    color: white;
-    transition: 0.2s ease-in-out;
+    position: absolute;
+    background: none;
+    margin: 9px;
+    color: #fff;
+    right: 30px;
   }
-  
   input.search-bar {
     border: none;
     outline: none;
@@ -55,7 +56,13 @@
     color: white;
     font-family: inherit;
     font-size: 100%;
-    width: calc(100% - 100px);
+    width: 100% ;
+  }
+  .error{
+    color: rgb(231, 12, 12);
+    font-weight: bold;
+    margin-left: 50px;
+    margin-right: 50px;
   }
   
   button:hover {

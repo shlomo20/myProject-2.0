@@ -44,7 +44,7 @@ export default function Contact()
                                 <textarea className="msg" type="text" placeholder="Message" cols="40" rows="5"  required name="Message" ></textarea>
                             </div>
                             <input name="_formsubmit_id" type="text" className="formsubmit_id"/>
-                            <button className="button" type="submit">
+                            <button className="cButton" type="submit">
                                 <i className="fa fa-paper-plane"></i> SEND MESSAGE
                             </button>
                         </form>

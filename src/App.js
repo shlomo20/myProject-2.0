@@ -33,13 +33,39 @@ function App() {
   useEffect(()=>{
     async function getCityData(c){
       var req = c.zip === null ?c.name:c.zip
-      var res = await fetch('https://websrapjs.vercel.app/data/weather/'+ req )
-      var data = await res.json()
-      setCitiesWeatherData(prev => ([...prev,data]))
-      console.log(data);
-      var reqStatus = res.status=== 200? "good":"bad"
+      try{
+        var res = await fetch('https://websrapjs-ashen.vercel.app/data/weather/'+ req )
+        var rData = await res.json()
+        console.log( rData);
+        setCitiesWeatherData(prev => ([...prev,rData]))
+        var reqStatus ="good" ;
+        return [reqStatus,rData];
+      }
+      catch{
+        var reqStatus = "bad";
+        return reqStatus;
+      }
+      
+     
       console.log("reqStatus", reqStatus);
-      return reqStatus;
+     
+    }
+    function setCity(c,d){
+      if(tempCities[c].zip == null || tempCities[c].name === null ){
+       
+        const disCity = {
+          "name": d.region, 
+          "info": 222, 
+          "zip": d.region.split(",")[1].replace(/[^0-9]/g,''), 
+          "country": "us"}
+        setCities(prev => ([...prev,disCity]))  
+      }
+      else{
+        setCities(prev => ([...prev,tempCities[c]]))  
+      }
+      if(c === tempCities.length - 1){
+        setTempCities([])
+      }  
     }
     async function forEach(){
       for( let c = 0; c < tempCities.length; c++){
@@ -51,22 +77,7 @@ function App() {
         }
         else{
           setBadRequest(false)
-          if(tempCities[c].zip == null || tempCities[c].name === null ){
-            const cwd =citiesWeatherData[citiesWeatherData.length -1]
-            const disCity = {
-              "name": cwd.region, 
-              "info": 222, 
-              "zip": cwd.region.split(",")[1].replace(/[^0-9]/g,''), 
-              "country": "us"}
-            setCities(prev => ([...prev,disCity]))  
-          }
-          else{
-            setCities(prev => ([...prev,tempCities[c]]))  
-          }
-
-          if(c === tempCities.length - 1){
-            setTempCities([])
-          }  
+          setCity(c,gcd[1]);
         } 
       }
     }

@@ -54,7 +54,7 @@ function App() {
           if(tempCities[c].zip == null || tempCities[c].name === null ){
             const cwd =citiesWeatherData[citiesWeatherData.length -1]
             const disCity = {
-              "name": cwd.region.split(",")[0], 
+              "name": cwd.region, 
               "info": 222, 
               "zip": cwd.region.split(",")[1].replace(/[^0-9]/g,''), 
               "country": "us"}

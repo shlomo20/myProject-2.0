@@ -7,6 +7,12 @@ export default function Nav(props) {
 
     const location = useLocation()
     var ls =location.state;
+    React.useEffect(() => {
+        if(props.cityIsActive && ls == undefined){
+        
+            props.ActivateMe("home")
+        }
+    }, [location.pathname]);
 
     return (
     <>

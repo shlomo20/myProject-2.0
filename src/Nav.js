@@ -66,7 +66,16 @@ export default function Nav(props) {
                     </div>
                 :""
             }
-                <div className="indicator"></div>
+            <div className="indicator"></div>
+           
+                <div className= "settings"> 
+                    <li className="list">
+                        <button onClick={()=> props.ActivateMe("settings")}>
+                            <span className="icon"><ion-icon name="settings-outline"></ion-icon></span>
+                            <span className="text">Settings</span>
+                        </button>
+                    </li>
+                </div>
             </ul>
         </div>
     </>

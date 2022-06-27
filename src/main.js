@@ -11,6 +11,15 @@ import merge from "lodash/merge"
       search:"",
   })
   const [error, setError] = React.useState(false)
+  React.useEffect(()=>{
+    if(props.badRequest=== true){
+      setError(true)
+    }
+
+  },[props.badRequest])
+
+
+
   function handelSearchData(e){
       const {value, name } = e.target;
       setSearchData(prev =>({
@@ -43,12 +52,6 @@ import merge from "lodash/merge"
     e.preventDefault();
     function a (){ props.searchMe(searchData.search)};
     a();
-    if(props.badRequest=== false){
-      setError(false)
-    }
-    else{
-       setError(true)
-    }
     setSearchData("")
   }
 

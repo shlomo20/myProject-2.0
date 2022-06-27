@@ -36,7 +36,7 @@ function App() {
     async function getCityData(c){
       var req = c.zip === null ?c.name:c.zip
       try{
-        var res = await fetch('https://websrapjs-ashen.vercel.app/dev/data/weather/'+ req )
+        var res = await fetch('https://websrapjs-ashen.vercel.app/data/weather/'+ req )
         var rData = await res.json()
         console.log( rData);
         setCitiesWeatherData(prev => ([...prev,rData]))

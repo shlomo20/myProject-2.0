@@ -4,7 +4,21 @@
     width: 300px;
     height: 100%;
     background-color: black;
-    z-index: 3;
     color: #fff;
-    padding: 10px;
+    padding: 5px;
+    z-index: 3;
+}
+.icfl {
+    display: flex;
+    gap: 10px;
+    background: #29fd53b8;
+    border: 1px solid #fff;
+    border-radius: 15px;
+    margin: 5px;
+}
+.Corder{
+    border: 1px solid #000;
+    border-radius: 50%;
+    width: 20px;
+    padding-left: 4px;
 }

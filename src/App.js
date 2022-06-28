@@ -7,6 +7,7 @@ import About from './About';
 import Contact from './Contact';
 import MainCard from './mainCard';
 import CityPage from './CityPage'
+import Settings from  './settings'
 
 function App() { 
 
@@ -20,6 +21,7 @@ function App() {
   const [tempCities, setTempCities] = useState([])
   const [citiesWeatherData, setCitiesWeatherData] = useState([])
   const [badRequest, setBadRequest] = useState(false)
+  const [showSettings, setShowSettings] =useState(false)
   useEffect(()=>{
     async function getCities(){
       var res = await fetch('./data.json')
@@ -85,6 +87,10 @@ function App() {
     console.log(tempCities)
     console.log(citiesWeatherData)
   },[tempCities])
+  useEffect (()=>{
+    if(showSettings== true){document.body.classList.add('oH');}
+    else{document.body.classList.remove('oH')}
+  },[showSettings])
 
   function handelActive (e){
       if(e === "about"){
@@ -94,6 +100,10 @@ function App() {
           contact: false,
           city:false
         })
+      }
+      else if(e === "settings"){
+        setShowSettings(!showSettings)
+        return
       }
       else if(e === "contact"){
         setActive({
@@ -138,6 +148,7 @@ function App() {
             contactIsActive={isActive.contact} 
             cityIsActive={isActive.city}
             ActivateMe={handelActive}/>
+        { showSettings ?<Settings/>:""}
         <Routes>
           <Route path="/*"  element={<HomePage cities={cities} citiesWeatherData={citiesWeatherData} searchMe={searchMe} badRequest={badRequest}/>}/>
           <Route path="/about" element={<About/>}/>

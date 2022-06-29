@@ -3,9 +3,12 @@ import React,{useState,useEffect } from 'react'
 import { DragDropContext, Droppable, Draggable } from 'react-beautiful-dnd';
 import styled from 'styled-components';
 import './settings.css'
+import Login from './login';
+import {auth} from './firebase-config'
+import {onAuthStateChanged,signOut} from 'firebase/auth'
 
 export default function Settings(){
-
+    const [user,setUser] = useState('')
     const [savedCities, setSavedCities ] = useState([
         {id:1, name: "Williamsburg", info: 222, zip: "11249", country: "us", order: "0" },
         {id:2, name: "Borough Park",info: 222,zip: "11219", country: "us", order: "1" },
@@ -13,6 +16,14 @@ export default function Settings(){
         {id:4, name: "Monsey",info: 444,zip: "10952", country: "us", order: "3" },
         {id:5, name: "Lakewood",info: 555,zip: "08701", country: "us", order: "4" },
         {id:6, name: "Miami",info: 555,zip: "33101", country: "us", order: "5"}])
+
+    onAuthStateChanged(auth,(currentUser)=>{
+        setUser(currentUser)
+        }
+    )    
+    const logout = async ()=>{
+        await signOut(auth);
+    }
 
     const onDragEnd = result =>{
         const {destination, source, draggableId } = result;
@@ -59,28 +70,34 @@ export default function Settings(){
             </Draggable>)
     });
     
+    const Page = ()=>{
+        return(<>
+            <div> 
+            <DragDropContext onDragEnd={onDragEnd}>
+                {
+                    <Droppable droppableId="1">{provided =>
+                        <List ref={provided.innerRef} {...provided.droppableProps}>
+                            {provided.placeholder}
+                            {Sc}
+                        </List>
+                    }
+                    </Droppable>
+                }
+            </DragDropContext>
+        </div>
+        <div>
+            <form>
+                <input className="input " type="text" placeholder="City Name" required name="City Name"/>
+                <input className="input" type="text" placeholder="Zip Code" required name="Zip Code"/>
+            </form>
+        </div>
+        <button onClick={logout}>Sign Out</button>
+        </>)
+    }
+    
     return(
         <div className="sPage">
-            <div> 
-                <DragDropContext onDragEnd={onDragEnd}>
-                    {
-                        <Droppable droppableId="1">{provided =>
-                            <List ref={provided.innerRef} {...provided.droppableProps}>
-                                {provided.placeholder}
-                                {Sc}
-                            </List>
-                        }
-                        </Droppable>
-                    }
-                </DragDropContext>
-            </div>
-            <div>
-                <form>
-                    <input className="input " type="text" placeholder="City Name" required name="City Name"/>
-                    <input className="input" type="text" placeholder="Zip Code" required name="Zip Code"/>
-                </form>
-            </div>
+            {!user?  <Login user={user}/>:<Page/>}
         </div>
-
     )
 }

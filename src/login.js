@@ -1,20 +1,16 @@
 import React , {useState} from 'react'
 import {auth,} from './firebase-config'
-import{ createUserWithEmailAndPassword, signInWithEmailAndPassword, signOut, 
-  signInWithPopup, GoogleAuthProvider, GithubAuthProvider,onAuthStateChanged} from 'firebase/auth'
-import { async } from '@firebase/util';
+import{ createUserWithEmailAndPassword, signInWithEmailAndPassword,signInWithEmailLink,
+  signInWithPopup, GoogleAuthProvider, GithubAuthProvider,} from 'firebase/auth'
 
 
-export default function Login() {
+
+export default function Login(props) {
   const [registerEmail,setRegisterEmail] = useState('');
   const [registerPassword,setRegisterPassword] = useState('');
   const [loginEmail,setLoginEmail] = useState('');
   const [loginPassword,setLoginPassword] = useState('');
-  const [user,setUser] = useState('')
-  onAuthStateChanged(auth,(currentUser)=>{
-    setUser(currentUser)
-  }
-  )
+
 
   const signInWithGmail = async ()=>{
     const provider = new GoogleAuthProvider();
@@ -27,6 +23,7 @@ export default function Login() {
       console.log(error.message)
     }
   }
+
   const signInWithGitHub = async ()=>{
     const provider = new GithubAuthProvider();
     try{
@@ -39,7 +36,33 @@ export default function Login() {
     }
   }
 
-  
+  const signInWithLink = async ()=>{
+    /*const actionCodeSettings = {
+      url: 'https://www.example.com/?email=user@example.com',
+      iOS: {
+         bundleId: 'com.example.ios'
+      },
+      android: {
+        packageName: 'com.example.android',
+        installApp: true,
+        minimumVersion: '12'
+      },
+      handleCodeInApp: true
+    };
+      await sendSignInLinkToEmail(auth, 'user@example.com', actionCodeSettings);
+      // Obtain emailLink from the user.
+      if(isSignInWithEmailLink(auth, emailLink)) {
+        await signInWithEmailLink(auth, 'user@example.com', emailLink);
+      }*/
+    try{
+      const user = await signInWithEmailLink(auth,'','actionCodeSettings');
+      console.log(user)
+
+    }catch(error){
+      console.log(error)
+      console.log(error.message)
+    }
+  }
   const register = async ()=>{
     try{
       const user = await createUserWithEmailAndPassword(auth,registerEmail, registerPassword);
@@ -53,7 +76,6 @@ export default function Login() {
     }
   }
   
-
   const login = async ()=>{
     try{
       const user = await signInWithEmailAndPassword(auth,loginEmail, loginPassword);
@@ -67,12 +89,15 @@ export default function Login() {
     }
     
   }
-  const logout = async ()=>{
-      await signOut(auth);
-  }
 
   return (
     <div>
+      <div>
+        <h3>1 Click Sign In</h3>
+        <button on onClick={signInWithGmail}>Sign With Gmail</button>
+        <button on onClick={signInWithGitHub}>Sign With Github</button>
+        <button on onClick={signInWithGitHub}>Get Email Link</button>
+      </div>
       <div>
         <h3>Register User</h3>
         <input placeholder='Email...' value={registerEmail} onChange={(e)=> setRegisterEmail(e.target.value)}/>
@@ -80,22 +105,11 @@ export default function Login() {
         <button onClick={register}>Create User</button>
       </div>
       <div>
-        <button on onClick={signInWithGmail}>Sign With Gmail</button>
-        <button on onClick={signInWithGitHub}>Sign With Github</button>
-      </div>
-      <div>
         <h3> Login</h3>
-        
         <input placeholder='Email...' value={loginEmail} onChange={(e)=> setLoginEmail(e.target.value)}/>
         <input placeholder='Password... ' value={loginPassword} onChange={(e)=> setLoginPassword(e.target.value)}/>
         <button onClick={login}>Login</button>
       </div>
-      <h4>
-        User Logged In: 
-        {user? user.email:""}
-      </h4>
-      <button onClick={logout}>Sign Out</button>
-      
     </div>
   )
 }

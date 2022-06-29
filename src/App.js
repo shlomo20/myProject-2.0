@@ -5,7 +5,7 @@ import Nav from './Nav';
 import HomePage from './main'
 import About from './About';
 import Contact from './Contact';
-import MainCard from './mainCard';
+import LogIn from './login';
 import CityPage from './CityPage'
 import Settings from  './settings'
 
@@ -36,7 +36,7 @@ function App() {
     async function getCityData(c){
       var req = c.zip === null ?c.name:c.zip
       try{
-        var res = await fetch('https://websrapjs-ashen.vercel.app/data/weather/'+ req )
+        var res = await fetch('https://websrapjs-ashen.vercel.app/dev/data/weather/'+ req )
         var rData = await res.json()
         console.log( rData);
         setCitiesWeatherData(prev => ([...prev,rData]))
@@ -152,6 +152,7 @@ function App() {
         <Routes>
           <Route path="/*"  element={<HomePage cities={cities} citiesWeatherData={citiesWeatherData} searchMe={searchMe} badRequest={badRequest}/>}/>
           <Route path="/about" element={<About/>}/>
+          <Route path="/login" element={<LogIn/>}/>
           <Route path="/contact" element={<Contact/>}/>
           <Route path='/c/:id' element={<CityPage ActivateMe={handelActive}/>} /> 
         </Routes>

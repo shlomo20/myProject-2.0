@@ -36,7 +36,7 @@ function App() {
     async function getCityData(c){
       var req = c.zip === null ?c.name:c.zip
       try{
-        var res = await fetch('https://websrapjs-ashen.vercel.app/dev/data/weather/'+ req )
+        var res = await fetch( process.env.REACT_APP_BE_DEV_URL+'/data/weather/'+ req )
         var rData = await res.json()
         setCitiesWeatherData(prev => ([...prev,rData]))
         var reqStatus ="good" ;

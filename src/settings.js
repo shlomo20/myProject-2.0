@@ -11,18 +11,17 @@ import { async } from '@firebase/util';
 export default function Settings(){
     const [user,setUser] = useState('')
     const [savedCities, setSavedCities ] = useState([])
-    
+    const userId = '2'
     useEffect(()=>{
-        const id = '2'
          async function f(){
             const allData = []
-            const res = await fetch(process.env.REACT_APP_BE_URL + "/data/users/user/?uid="+ id )
+            const res = await fetch(process.env.REACT_APP_BE_URL + "/data/users/user/?uid="+ userId )
             var uData = await res.json();
             console.log(uData)
             for(const c of uData[0].cityPref){ 
                 const {order} = c
-                const {zip,name,cityId} = c.cityRef
-                const city ={order: order, id:cityId, name:name,zip: zip}
+                const {zip,name,cityId,_id} = c.cityRef
+                const city ={order: order, id:cityId, name:name,zip: zip, _id:_id}
                 const a = allData.push(city)
             }
             setSavedCities(allData)
@@ -86,6 +85,20 @@ export default function Settings(){
         console.log(savedCitiesOrder)
         setSavedCities(savedCitiesOrder)
     }
+    const SaveSettings =async ()=>{
+        const postData = []
+        savedCities.forEach((c,i) => {
+            postData.push({order:c.order, cityRef:c._id})
+        });
+
+        const requestOptions = {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({  cityPref:postData })
+        };
+        const response = await fetch(process.env.REACT_APP_BE_URL+ "/data/users/updateuser?uid=" + userId, requestOptions)
+        const data = await response.json();
+    }
 
     const List = styled.div``;
     const Container = styled.div``;
@@ -105,7 +118,7 @@ export default function Settings(){
     
     const Page = ()=>{
         return(<>
-            <div> 
+            <div className='dBox'> 
             <DragDropContext onDragEnd={onDragEnd}>
                 {
                     <Droppable droppableId="1">{provided =>
@@ -119,9 +132,14 @@ export default function Settings(){
             </DragDropContext>
         </div>
         <div>
-            <form>
+            <button >Disregard Changes</button>
+            <button onClick={SaveSettings}>Save Settings</button>
+        </div>
+        <div>
+            <form className='acf'>
                 <input className="input " type="text" placeholder="City Name" required name="City Name"/>
                 <input className="input" type="text" placeholder="Zip Code" required name="Zip Code"/>
+                <button>Add city</button>
             </form>
         </div>
         <button className='loginButton' onClick={logout}>Sign Out</button>

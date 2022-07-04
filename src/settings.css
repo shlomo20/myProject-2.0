@@ -3,10 +3,17 @@
     right: 0px ;
     width: 500px;
     height: 100%;
-    background-color: black;
+    background-color: rgba(0, 0, 0, 0.863);
     color: #fff;
     padding: 30px;
     z-index: 3;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+    width: fit-content;
+}
+.dBox{
+    margin-bottom: 50px;
 }
 .icfl {
     display: flex;
@@ -15,12 +22,18 @@
     border: 1px solid #fff;
     border-radius: 15px;
     margin: 5px;
+    width: fit-content;
+    padding: 8px;
 }
 .Corder{
     border: 1px solid #000;
     border-radius: 50%;
     width: 20px;
     padding-left: 4px;
+}
+.acf{
+    display: flex;
+    flex-direction: column;
 }
 .loginButton{
     margin: 10px;

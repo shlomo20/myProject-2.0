@@ -91,7 +91,7 @@ export default function Settings(){
                 <input className="input" type="text" placeholder="Zip Code" required name="Zip Code"/>
             </form>
         </div>
-        <button onClick={logout}>Sign Out</button>
+        <button className='loginButton' onClick={logout}>Sign Out</button>
         </>)
     }
     

@@ -2,7 +2,7 @@ import React , {useState} from 'react'
 import {auth,} from './firebase-config'
 import{ createUserWithEmailAndPassword, signInWithEmailAndPassword,signInWithEmailLink,
   signInWithPopup, GoogleAuthProvider, GithubAuthProvider,} from 'firebase/auth'
-
+import "./login.css"
 
 
 export default function Login(props) {
@@ -10,7 +10,7 @@ export default function Login(props) {
   const [registerPassword,setRegisterPassword] = useState('');
   const [loginEmail,setLoginEmail] = useState('');
   const [loginPassword,setLoginPassword] = useState('');
-
+  const [isRegistered, setIsRegistered] = useState(true)
 
   const signInWithGmail = async ()=>{
     const provider = new GoogleAuthProvider();
@@ -28,34 +28,6 @@ export default function Login(props) {
     const provider = new GithubAuthProvider();
     try{
       const user = await signInWithPopup(auth,provider);
-      console.log(user)
-
-    }catch(error){
-      console.log(error)
-      console.log(error.message)
-    }
-  }
-
-  const signInWithLink = async ()=>{
-    /*const actionCodeSettings = {
-      url: 'https://www.example.com/?email=user@example.com',
-      iOS: {
-         bundleId: 'com.example.ios'
-      },
-      android: {
-        packageName: 'com.example.android',
-        installApp: true,
-        minimumVersion: '12'
-      },
-      handleCodeInApp: true
-    };
-      await sendSignInLinkToEmail(auth, 'user@example.com', actionCodeSettings);
-      // Obtain emailLink from the user.
-      if(isSignInWithEmailLink(auth, emailLink)) {
-        await signInWithEmailLink(auth, 'user@example.com', emailLink);
-      }*/
-    try{
-      const user = await signInWithEmailLink(auth,'','actionCodeSettings');
       console.log(user)
 
     }catch(error){
@@ -90,26 +62,48 @@ export default function Login(props) {
     
   }
 
+  const Register = ()=> {
+    return (
+      <div>
+        <h3>Register User</h3>
+        <input className='loginButton' placeholder='Email...' value={registerEmail} onChange={(e)=> setRegisterEmail(e.target.value)}/>
+        <input className='loginButton' placeholder='Password...' value={registerPassword} onChange={(e)=> setRegisterPassword(e.target.value)}/>
+        <button className='loginButton'  onClick={register}>Create User</button>
+      </div>
+    )
+  }
+
+  const LoginWithPass = ()=> {
+    return (
+      <div>
+        <h3> Login</h3>
+        <input className='loginButton' placeholder='Email...' value={loginEmail} onChange={(e)=> setLoginEmail(e.target.value)}/>
+        <input className='loginButton' placeholder='Password... ' value={loginPassword} onChange={(e)=> setLoginPassword(e.target.value)}/>
+        <button className='loginButton' onClick={login}>Login</button>
+      </div>
+    )
+  }
+  const changeIsRegistered = ()=>{
+    setIsRegistered(!isRegistered)
+  }
+
   return (
     <div>
       <div>
         <h3>1 Click Sign In</h3>
-        <button on onClick={signInWithGmail}>Sign With Gmail</button>
-        <button on onClick={signInWithGitHub}>Sign With Github</button>
-        <button on onClick={signInWithGitHub}>Get Email Link</button>
+        <button className='buttonB'  onClick={signInWithGmail}><ion-icon id="ic"name="logo-google"></ion-icon></button>
+        <button className='buttonB'  onClick={signInWithGitHub}><ion-icon id="ic" name="logo-github"></ion-icon></button>
       </div>
-      <div>
-        <h3>Register User</h3>
-        <input placeholder='Email...' value={registerEmail} onChange={(e)=> setRegisterEmail(e.target.value)}/>
-        <input placeholder='Password...' value={registerPassword} onChange={(e)=> setRegisterPassword(e.target.value)}/>
-        <button onClick={register}>Create User</button>
-      </div>
-      <div>
-        <h3> Login</h3>
-        <input placeholder='Email...' value={loginEmail} onChange={(e)=> setLoginEmail(e.target.value)}/>
-        <input placeholder='Password... ' value={loginPassword} onChange={(e)=> setLoginPassword(e.target.value)}/>
-        <button onClick={login}>Login</button>
-      </div>
+      {isRegistered? 
+        <div>
+          <LoginWithPass/> 
+          <p>Don't have a login register <button className='changeR' onClick={changeIsRegistered}>Here</button> </p>
+        </div> : 
+        <div>
+          <Register/>
+          <p> Do you have a login Sign In  <button className='changeR' onClick={changeIsRegistered}>Here</button> </p>
+        </div>
+      }
     </div>
   )
 }

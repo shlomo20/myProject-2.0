@@ -38,7 +38,6 @@ function App() {
       try{
         var res = await fetch('https://websrapjs-ashen.vercel.app/dev/data/weather/'+ req )
         var rData = await res.json()
-        console.log( rData);
         setCitiesWeatherData(prev => ([...prev,rData]))
         var reqStatus ="good" ;
         return [reqStatus,rData];
@@ -47,10 +46,6 @@ function App() {
         var reqStatus = "bad";
         return reqStatus;
       }
-      
-     
-      console.log("reqStatus", reqStatus);
-     
     }
     function setCity(c,d){
       if(tempCities[c].zip == null || tempCities[c].name === null ){

@@ -6,21 +6,38 @@ import './settings.css'
 import Login from './login';
 import {auth} from './firebase-config'
 import {onAuthStateChanged,signOut} from 'firebase/auth'
+import { async } from '@firebase/util';
 
 export default function Settings(){
     const [user,setUser] = useState('')
-    const [savedCities, setSavedCities ] = useState([
-        {id:1, name: "Williamsburg", info: 222, zip: "11249", country: "us", order: "0" },
-        {id:2, name: "Borough Park",info: 222,zip: "11219", country: "us", order: "1" },
-        {id:3, name: "Monroe",info: 333,zip: "10950", country: "us", order: "2" },
-        {id:4, name: "Monsey",info: 444,zip: "10952", country: "us", order: "3" },
-        {id:5, name: "Lakewood",info: 555,zip: "08701", country: "us", order: "4" },
-        {id:6, name: "Miami",info: 555,zip: "33101", country: "us", order: "5"}])
-
-    onAuthStateChanged(auth,(currentUser)=>{
-        setUser(currentUser)
+    const [savedCities, setSavedCities ] = useState([])
+    
+    useEffect(()=>{
+        const id = '2'
+         async function f(){
+            const allData = []
+            const res = await fetch(process.env.REACT_APP_BE_URL + "/data/users/user/?uid="+ id )
+            var uData = await res.json();
+            console.log(uData)
+            for(const c of uData[0].cityPref){ 
+                const {order} = c
+                const {zip,name,cityId} = c.cityRef
+                const city ={order: order, id:cityId, name:name,zip: zip}
+                const a = allData.push(city)
+            }
+            setSavedCities(allData)
         }
-    )    
+        f()
+    },[])
+
+    useEffect(()=>{
+        onAuthStateChanged(auth,(currentUser)=>{
+                setUser(currentUser)
+                console.log(currentUser)
+            }
+        )
+    },[auth]  )
+
     const logout = async ()=>{
         await signOut(auth);
     }
@@ -45,26 +62,42 @@ export default function Settings(){
         savedCitiesOrder.splice(destination.index, 0, savedCitiesReOrder[parseInt(draggableId)] )
 
         savedCitiesOrder.map((e, index)=>{
-            e.order = index.toString();
+            e.order = index;
         })
         
         console.log(savedCitiesOrder)
         setSavedCities(savedCitiesOrder)
+    }
 
+    const deleteCity = (e)=>{
+        console.log(e.target.id)
+        let cityIndex = 0
+        const savedCitiesOrder =[...savedCities] ;
+        savedCities.forEach((c,i) => {
+            if(c.name === e.target.id){
+                cityIndex = i 
+            }
+        });
 
+        savedCitiesOrder.splice(cityIndex, 1 )
+        savedCitiesOrder.map((e, index)=>{
+            e.order = index;
+        })
+        console.log(savedCitiesOrder)
+        setSavedCities(savedCitiesOrder)
     }
 
     const List = styled.div``;
     const Container = styled.div``;
+
     const Sc = savedCities.map((e,index) => {
         return(
-            <Draggable draggableId={e.order} index={index}>{provided =>
-                <Container className='icfl' {...provided.draggableProps} 
-                ref={provided.innerRef}>
+            <Draggable draggableId={e.order.toString()} index={index}>{provided =>
+                <Container className='icfl' {...provided.draggableProps} ref={provided.innerRef}>
                     <div className='Corder'>{parseInt(e.order) + 1}</div>
                     {e.name +"  "+e.zip}
-                    <ion-icon name="trash-outline"></ion-icon>
                     <ion-icon {...provided.dragHandleProps} name="swap-vertical-outline"></ion-icon>
+                    <button id={e.name} onClick={deleteCity}>< ion-icon  id={e.name} name="trash-outline"></ion-icon></button>
                 </Container>
             }
             </Draggable>)

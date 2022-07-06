@@ -1,13 +1,18 @@
 import React,{useState, useEffect} from 'react';
-import{BrowserRouter as Router,Routes, Switch,Route}from'react-router-dom';
+import{BrowserRouter as Router,Routes,Route}from'react-router-dom';
 import './App.css';
 import Nav from './Nav';
 import HomePage from './main'
 import About from './About';
 import Contact from './Contact';
-import MainCard from './mainCard';
+import LogIn from './login';
 import CityPage from './CityPage'
 import Settings from  './settings'
+import {onAuthStateChanged,signOut,} from 'firebase/auth'
+import {auth} from './firebase-config'
+
+const URL = process.env.REACT_APP_BE_URL
+const URLDEV = process.env.REACT_APP_BE_DEV_URL
 
 function App() { 
 
@@ -23,22 +28,52 @@ function App() {
   const [badRequest, setBadRequest] = useState(false)
   const [showSettings, setShowSettings] =useState(false)
   useEffect(()=>{
-    async function getCities(){
-      var res = await fetch('./data.json')
+      onAuthStateChanged(auth,(currentUser)=>{
+          console.log( currentUser)
+          if( auth.currentUser!= null){
+            let uid = auth.currentUser.uid
+            getCitiesData(uid)
+          }
+          else{
+            getDefaultCitiesData()
+          }
+      }
+    )
+    async function getCitiesData(uid){
+      var res = await fetch( URL +'/data/weather/foruser?uid='+ uid)
       var data = await res.json()
-      setTempCities(data.Cities)
-      console.log("Cities changed");
+      var cities = await fetch( URL +'/data/users/user/?uid='+uid)
+      var citiesData = await cities.json()
+      var extCitiesData = []
+      citiesData[0].cityPref.forEach(e => {
+          extCitiesData.push(e.cityRef)
+      });
+      setCities(extCitiesData)  
+      setCitiesWeatherData(data)
+      console.log(`Loaded ${auth.currentUser.email} Cities`);
     }
-    getCities();
-  },[]);
+    async function getDefaultCitiesData(){
+      var res = await fetch( URL +'/data/weather/foruser?uid=1')
+      var data = await res.json()
+      var cities = await fetch( URL +'/data/users/user/?uid=1')
+      var citiesData = await cities.json()
+      var extCitiesData = []
+      citiesData[0].cityPref.forEach(e => {
+          extCitiesData.push(e.cityRef)
+      });
+      setCities(extCitiesData)  
+      setCitiesWeatherData(data)
+      console.log("Loaded default Cities");
+    }
+
+  },[auth])
 
   useEffect(()=>{
     async function getCityData(c){
       var req = c.zip === null ?c.name:c.zip
       try{
-        var res = await fetch('https://websrapjs-ashen.vercel.app/data/weather/'+ req )
+        var res = await fetch( URL+'/data/weather/'+ req )
         var rData = await res.json()
-        console.log( rData);
         setCitiesWeatherData(prev => ([...prev,rData]))
         var reqStatus ="good" ;
         return [reqStatus,rData];
@@ -47,10 +82,6 @@ function App() {
         var reqStatus = "bad";
         return reqStatus;
       }
-      
-     
-      console.log("reqStatus", reqStatus);
-     
     }
     function setCity(c,d){
       if(tempCities[c].zip == null || tempCities[c].name === null ){
@@ -87,6 +118,7 @@ function App() {
     console.log(tempCities)
     console.log(citiesWeatherData)
   },[tempCities])
+
   useEffect (()=>{
     if(showSettings== true){document.body.classList.add('oH');}
     else{document.body.classList.remove('oH')}
@@ -152,6 +184,7 @@ function App() {
         <Routes>
           <Route path="/*"  element={<HomePage cities={cities} citiesWeatherData={citiesWeatherData} searchMe={searchMe} badRequest={badRequest}/>}/>
           <Route path="/about" element={<About/>}/>
+          <Route path="/login" element={<LogIn/>}/>
           <Route path="/contact" element={<Contact/>}/>
           <Route path='/c/:id' element={<CityPage ActivateMe={handelActive}/>} /> 
         </Routes>

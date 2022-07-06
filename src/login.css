@@ -1,0 +1,22 @@
+#ic{
+    height: 31px;
+    width: 30px;
+}
+.buttonB{
+    margin: 10px;
+    border-radius: 35px;
+    padding: 10px;
+    width: 60px;
+}
+.loginButton{
+    margin: 10px;
+    border-radius: 5px;
+    padding: 10px;
+}
+.changeR{
+    
+    color: #fff;
+    background: none;
+    text-decoration: underline;
+
+}

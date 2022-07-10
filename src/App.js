@@ -10,6 +10,7 @@ import CityPage from './CityPage'
 import Settings from  './settings'
 import {onAuthStateChanged,signOut,} from 'firebase/auth'
 import {auth} from './firebase-config'
+import Loading from './animations/Loading';
 
 const URL = process.env.REACT_APP_BE_URL
 const URLDEV = process.env.REACT_APP_BE_DEV_URL
@@ -27,6 +28,9 @@ function App() {
   const [citiesWeatherData, setCitiesWeatherData] = useState([])
   const [badRequest, setBadRequest] = useState(false)
   const [showSettings, setShowSettings] =useState(false)
+  const [isLoading, setIsLoading] = useState(true)
+
+
   useEffect(()=>{
       onAuthStateChanged(auth,(currentUser)=>{
           console.log( currentUser)
@@ -40,9 +44,9 @@ function App() {
       }
     )
     async function getCitiesData(uid){
-      var res = await fetch( URL +'/data/weather/foruser?uid='+ uid)
+      var res = await fetch( URL+'/data/weather/foruser?uid='+ uid)
       var data = await res.json()
-      var cities = await fetch( URL +'/data/users/user/?uid='+uid)
+      var cities = await fetch( URL+'/data/users/user/?uid='+uid)
       var citiesData = await cities.json()
       var extCitiesData = []
       citiesData[0].cityPref.forEach(e => {
@@ -53,9 +57,9 @@ function App() {
       console.log(`Loaded ${auth.currentUser.email} Cities`);
     }
     async function getDefaultCitiesData(){
-      var res = await fetch( URL +'/data/weather/foruser?uid=1')
+      var res = await fetch( URL+'/data/weather/foruser?uid=1')
       var data = await res.json()
-      var cities = await fetch( URL +'/data/users/user/?uid=1')
+      var cities = await fetch( URL+'/data/users/user/?uid=1')
       var citiesData = await cities.json()
       var extCitiesData = []
       citiesData[0].cityPref.forEach(e => {
@@ -63,6 +67,8 @@ function App() {
       });
       setCities(extCitiesData)  
       setCitiesWeatherData(data)
+        setIsLoading(false)
+
       console.log("Loaded default Cities");
     }
 
@@ -180,14 +186,16 @@ function App() {
             contactIsActive={isActive.contact} 
             cityIsActive={isActive.city}
             ActivateMe={handelActive}/>
-        { showSettings ?<Settings/>:""}
-        <Routes>
-          <Route path="/*"  element={<HomePage cities={cities} citiesWeatherData={citiesWeatherData} searchMe={searchMe} badRequest={badRequest}/>}/>
-          <Route path="/about" element={<About/>}/>
-          <Route path="/login" element={<LogIn/>}/>
-          <Route path="/contact" element={<Contact/>}/>
-          <Route path='/c/:id' element={<CityPage ActivateMe={handelActive}/>} /> 
-        </Routes>
+            <div className='maWtSe'>
+              <Routes>
+                <Route path="/*"  element={isLoading ?<Loading/>: <HomePage cities={cities} citiesWeatherData={citiesWeatherData} searchMe={searchMe} badRequest={badRequest}/>}/>
+                <Route path="/about" element={<About/>}/>
+                <Route path="/login" element={<LogIn/>}/>
+                <Route path="/contact" element={<Contact/>}/>
+                <Route path='/c/:id' element={<CityPage ActivateMe={handelActive}/>} /> 
+              </Routes>
+              { showSettings ?<Settings/>:""}
+            </div>
       </Router>
     </>
   );

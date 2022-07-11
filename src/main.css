@@ -3,6 +3,7 @@
   min-height: 90vh;
   background-repeat: no-repeat;
   background-size: 100% 100%;
+  width: 100%;
 }
 .card {
     background: #000000d0;
@@ -31,6 +32,7 @@
   .form{
     width: 100%;
     padding: 25px;
+    display: flex;
   }
   .search {
     display: flex;
@@ -41,7 +43,7 @@
   }
   .button {
     border: none;
-    position: absolute;
+    position: relative;
     background: none;
     margin: 9px;
     color: #fff;

@@ -67,7 +67,10 @@ import merge from "lodash/merge"
         we are working on adding search by city, please change your search 
         to a zipcode or double check your zipcode has  5 digits </div>:""}       
     </div>
-    {weatherDataEl}
+    <div className='mainContent'>
+      {weatherDataEl}
+    </div>
+
     </div>
   );
 }

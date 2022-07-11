@@ -82,12 +82,15 @@
     margin: 20px;
     margin-left: 20em;
 }
+.cn1{
+    width: 100%;
+}
 a{
     color: rgba(0, 255, 13, 0.637);
 }
 @media only screen and (max-device-width: 750px) {
     #contact{background-size: 253% 129%;
-        background-position-x: -475px;
+        background-position-x: -615px;
         background-position-y: -241px;}
     
     .git{left: 10px; font-size: 2em;}
@@ -103,5 +106,10 @@ a{
     .sec2{
         width: 22em;
     }
-    .button{margin-left: 12em;}
+    .cButton{margin-left: 12em;}
+}
+@media only screen and (max-device-width: 500px) {
+    #contact{background-size: 253% 129%;
+        background-position-x: -475px;
+        background-position-y: -241px;}
 }

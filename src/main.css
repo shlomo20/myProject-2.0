@@ -3,7 +3,16 @@
   min-height: 90vh;
   background-repeat: no-repeat;
   background-size: 100% 100%;
+  background-attachment: fixed;
   width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+.mainContent{
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
 }
 .card {
     background: #000000d0;
@@ -40,6 +49,7 @@
     justify-content: center;
     border-top: 50px solid #0000;
     flex-direction: column;
+    width: 100%;
   }
   .button {
     border: none;

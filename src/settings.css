@@ -7,6 +7,8 @@
     flex-direction: column;
     align-items: flex-end;
     width: fit-content;
+    min-height: 80%;
+    max-width: 70%;
 }
 .dBox{
     margin-bottom: 50px;
@@ -35,4 +37,10 @@
     margin: 10px;
     border-radius: 5px;
     padding: 10px;
+}
+@media only screen and (max-device-width: 750px) {
+    .sPage{
+        position: fixed;
+        right: 0;
+    }
 }

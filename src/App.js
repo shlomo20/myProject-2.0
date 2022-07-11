@@ -30,6 +30,34 @@ function App() {
   const [showSettings, setShowSettings] =useState(false)
   const [isLoading, setIsLoading] = useState(true)
 
+  async function getCitiesData(uid){
+    var res = await fetch( URL +'/data/weather/foruser?uid='+ uid)
+    var data = await res.json()
+    var cities = await fetch( URL +'/data/users/user/?uid='+uid)
+    var citiesData = await cities.json()
+    var extCitiesData = []
+    citiesData[0].cityPref.forEach(e => {
+        extCitiesData.push(e.cityRef)
+    });
+    setCities(extCitiesData)  
+    setCitiesWeatherData(data)
+    setIsLoading(false)
+    console.log(`Loaded ${auth.currentUser.email} Cities`);
+  }
+  async function getDefaultCitiesData(){
+    var res = await fetch( URL +'/data/weather/foruser?uid=1')
+    var data = await res.json()
+    var cities = await fetch( URL +'/data/users/user/?uid=1')
+    var citiesData = await cities.json()
+    var extCitiesData = []
+    citiesData[0].cityPref.forEach(e => {
+        extCitiesData.push(e.cityRef)
+    });
+    setCities(extCitiesData)  
+    setCitiesWeatherData(data)
+    setIsLoading(false)
+        console.log("Loaded default Cities");
+  }
 
   useEffect(()=>{
       onAuthStateChanged(auth,(currentUser)=>{
@@ -43,34 +71,7 @@ function App() {
           }
       }
     )
-    async function getCitiesData(uid){
-      var res = await fetch( URL+'/data/weather/foruser?uid='+ uid)
-      var data = await res.json()
-      var cities = await fetch( URL+'/data/users/user/?uid='+uid)
-      var citiesData = await cities.json()
-      var extCitiesData = []
-      citiesData[0].cityPref.forEach(e => {
-          extCitiesData.push(e.cityRef)
-      });
-      setCities(extCitiesData)  
-      setCitiesWeatherData(data)
-      console.log(`Loaded ${auth.currentUser.email} Cities`);
-    }
-    async function getDefaultCitiesData(){
-      var res = await fetch( URL+'/data/weather/foruser?uid=1')
-      var data = await res.json()
-      var cities = await fetch( URL+'/data/users/user/?uid=1')
-      var citiesData = await cities.json()
-      var extCitiesData = []
-      citiesData[0].cityPref.forEach(e => {
-          extCitiesData.push(e.cityRef)
-      });
-      setCities(extCitiesData)  
-      setCitiesWeatherData(data)
-        setIsLoading(false)
-
-      console.log("Loaded default Cities");
-    }
+    
 
   },[auth])
 
@@ -78,7 +79,7 @@ function App() {
     async function getCityData(c){
       var req = c.zip === null ?c.name:c.zip
       try{
-        var res = await fetch( URL+'/data/weather/'+ req )
+        var res = await fetch( URL +'/data/weather/'+ req )
         var rData = await res.json()
         setCitiesWeatherData(prev => ([...prev,rData]))
         var reqStatus ="good" ;

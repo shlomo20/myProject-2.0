@@ -6,6 +6,7 @@ import TextAnimation from "./animations/TextAnimation";
 export default function Contact()
 {
     return(
+        <div className="cn1">
         <div id="contact">
             <h3 className="git">GET IN TOUCH!</h3>
             <p className="feed"> <TextAnimation /> </p>
@@ -51,6 +52,7 @@ export default function Contact()
                     </div>
                 </div>
             </div>
+        </div>
         </div>
     );
 }

@@ -126,7 +126,7 @@
   }
   .e-loadholder:after {
     width: 100px;
-    height: 200%;
+    height: 100%;
     -webkit-animation: outerRotate2 30s infinite linear;
     -moz-animation: outerRotate2 30s infinite linear;
     -o-animation: outerRotate2 30s infinite linear;

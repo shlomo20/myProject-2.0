@@ -62,27 +62,7 @@ export default function Login(props) {
     
   }
 
-  const Register = ()=> {
-    return (
-      <div>
-        <h3>Register User</h3>
-        <input className='loginButton' placeholder='Email...' value={registerEmail} onChange={(e)=> setRegisterEmail(e.target.value)}/>
-        <input className='loginButton' placeholder='Password...' value={registerPassword} onChange={(e)=> setRegisterPassword(e.target.value)}/>
-        <button className='loginButton'  onClick={register}>Create User</button>
-      </div>
-    )
-  }
 
-  const LoginWithPass = ()=> {
-    return (
-      <div>
-        <h3> Login</h3>
-        <input className='loginButton' placeholder='Email...' value={loginEmail} onChange={(e)=> setLoginEmail(e.target.value)}/>
-        <input className='loginButton' placeholder='Password... ' value={loginPassword} onChange={(e)=> setLoginPassword(e.target.value)}/>
-        <button className='loginButton' onClick={login}>Login</button>
-      </div>
-    )
-  }
   const changeIsRegistered = ()=>{
     setIsRegistered(!isRegistered)
   }
@@ -96,11 +76,21 @@ export default function Login(props) {
       </div>
       {isRegistered? 
         <div>
-          <LoginWithPass/> 
+          <div>
+            <h3> Login</h3>
+            <input className='loginButton' placeholder='Email...' value={loginEmail} onChange={(e)=> setLoginEmail(e.target.value)}/>
+            <input className='loginButton' placeholder='Password... ' value={loginPassword} onChange={(e)=> setLoginPassword(e.target.value)}/>
+            <button className='loginButton' onClick={login}>Login</button>
+          </div>
           <p>Don't have a login register <button className='changeR' onClick={changeIsRegistered}>Here</button> </p>
         </div> : 
         <div>
-          <Register/>
+           <div>
+              <h3>Register User</h3>
+              <input className='loginButton' placeholder='Email...' value={registerEmail} onChange={(e)=> setRegisterEmail(e.target.value)}/>
+              <input className='loginButton' placeholder='Password...' value={registerPassword} onChange={(e)=> setRegisterPassword(e.target.value)}/>
+              <button className='loginButton'  onClick={register}>Create User</button>
+            </div>
           <p> Do you have a login Sign In  <button className='changeR' onClick={changeIsRegistered}>Here</button> </p>
         </div>
       }

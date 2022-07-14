@@ -143,7 +143,7 @@ function App() {
       }
       else if(e === "settings"){
         if(settingHasChanges){
-          alert("You have unsaved changes")
+          alert("You have unsaved changes! ether save your changes or press the disregard button so we can be sure you don't wanna save them:)")
         }
         else{
           setShowSettings(!showSettings)

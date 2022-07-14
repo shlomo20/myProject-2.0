@@ -29,9 +29,10 @@ function App() {
   const [badRequest, setBadRequest] = useState(false)
   const [showSettings, setShowSettings] =useState(false)
   const [isLoading, setIsLoading] = useState(true)
+  const [settingHasChanges,setSettingsHasChanges] = useState(false)
 
   async function getCitiesData(uid){
-    var res = await fetch( URL +'/data/weather/foruser?uid='+ uid)
+    var res = await fetch( URLDEV +'/data/weather/foruser?uid='+ uid)
     var data = await res.json()
     var cities = await fetch( URL +'/data/users/user/?uid='+uid)
     var citiesData = await cities.json()
@@ -45,7 +46,7 @@ function App() {
     console.log(`Loaded ${auth.currentUser.email} Cities`);
   }
   async function getDefaultCitiesData(){
-    var res = await fetch( URL +'/data/weather/foruser?uid=1')
+    var res = await fetch( URLDEV +'/data/weather/foruser?uid=1')
     var data = await res.json()
     var cities = await fetch( URL +'/data/users/user/?uid=1')
     var citiesData = await cities.json()
@@ -56,7 +57,7 @@ function App() {
     setCities(extCitiesData)  
     setCitiesWeatherData(data)
     setIsLoading(false)
-        console.log("Loaded default Cities");
+    console.log("Loaded default Cities");
   }
 
   useEffect(()=>{
@@ -79,7 +80,7 @@ function App() {
     async function getCityData(c){
       var req = c.zip === null ?c.name:c.zip
       try{
-        var res = await fetch( URL +'/data/weather/'+ req )
+        var res = await fetch( URLDEV +'/data/weather/'+ req )
         var rData = await res.json()
         setCitiesWeatherData(prev => ([...prev,rData]))
         var reqStatus ="good" ;
@@ -141,7 +142,12 @@ function App() {
         })
       }
       else if(e === "settings"){
-        setShowSettings(!showSettings)
+        if(settingHasChanges){
+          alert("You have unsaved changes")
+        }
+        else{
+          setShowSettings(!showSettings)
+        }
         return
       }
       else if(e === "contact"){
@@ -179,6 +185,10 @@ function App() {
     }
     
   }
+  function handelSettings(e){
+    setSettingsHasChanges(e)
+    console.log(e)
+  }
   return (
     <>
       <Router>
@@ -195,7 +205,7 @@ function App() {
                 <Route path="/contact" element={<Contact/>}/>
                 <Route path='/c/:id' element={<CityPage ActivateMe={handelActive}/>} /> 
               </Routes>
-              { showSettings ?<Settings/>:""}
+              { showSettings ?<Settings SettingsHasChanges={settingHasChanges} setSettingsHasChanges={handelSettings} CloseSettings={handelActive} />:""}
             </div>
       </Router>
     </>

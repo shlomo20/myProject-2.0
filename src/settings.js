@@ -133,6 +133,7 @@ export default function Settings(props){
         })
         console.log(savedCitiesOrder)
         setSavedCities(savedCitiesOrder)
+        props.setSettingsHasChanges(true)
     }
     const SaveSettings =async ()=>{
         const postData = []
@@ -151,8 +152,9 @@ export default function Settings(props){
         props.setSettingsHasChanges(false)
     }
     const disregardChanges = ()=>{
+        alert("disregarded")
         props.setSettingsHasChanges(false)
-        //props.CloseSettings("settings")
+        f()
     }
     const addCity = async (e)=>{
         e.preventDefault()

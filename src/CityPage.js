@@ -1,14 +1,16 @@
-import React ,{useEffect, useState}from 'react'
+import React ,{useEffect, useState, useRef}from 'react'
 import { useParams, useLocation} from 'react-router-dom'
 import './CityPage.css'
 import ZmanimCard from './zmanimCard'
 
 export default function CityPage(props)
 {  
+    let ref = useRef(null);
 
     const [zmanimData, setZmanimData] = useState([])
-
-    const location = useLocation()
+    const [scrollEnd, setScrollEnd] = useState(false);
+    const [scrollX, setScrollX] = useState(0);
+    const location = useLocation(null)
     var ls =location.state;
     
 
@@ -44,13 +46,42 @@ export default function CityPage(props)
             <ZmanimCard zmanimData={zmanimData[0]}/>
         )}
     }
-
+    var scroll =(shift) => {
+        ref.current.scrollLeft += shift;
+        setScrollX(scrollX + shift);
+    
+        if (
+          Math.floor(ref.current.scrollWidth - ref.current.scrollLeft) <=
+          ref.current.offsetWidth
+        ) {
+          setScrollEnd(true);
+        } else {
+          setScrollEnd(false);
+        }
+    };    
+    const scrollCheck = () => {
+        setScrollX(ref.current.scrollLeft);
+        if (
+          Math.floor(ref.current.scrollWidth - ref.current.scrollLeft) <=
+          ref.current.offsetWidth
+        ) {
+          setScrollEnd(true);
+        } else {
+          setScrollEnd(false);
+        }
+      };
     return(
         <section id="ba">
             <div className='box'>
-                <div className='cityF'>   
+                {scrollX !=0 && <div className='arrow' onClick={() => scroll(-50)}>
+                    <ion-icon name="chevron-back-outline"></ion-icon>
+                </div >}
+                <div className='cityF'ref={ref} onScroll={scrollCheck} >   
                     {forecast}
                 </div>
+                {!scrollEnd  && (<div className='arrow'  onClick={() => scroll(50)}>
+                    <ion-icon name="chevron-forward-outline"></ion-icon>
+                </div >)}
             </div>
             <div className='zmanimBox'>
                 {z()}

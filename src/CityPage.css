@@ -13,6 +13,7 @@
     flex-direction: column;
     width: 100%;
     z-index: 2;
+    align-items: initial;
   }
   section#ba::before {
     content: "";
@@ -45,12 +46,15 @@
     z-index: 10;
     padding: 20px;
     backdrop-filter: blur(25px);
+    width: fit-content;
+    align-self: center;
   }
   .cityF{
     color: #fbfbfb;
     display: flex;
     margin: 10px;
     border-bottom: 1px solid;
+    overflow-x: scroll;
 }
 .dayI{
     margin: 10px;
@@ -73,18 +77,37 @@
     z-index: 10;
     padding: 20px;
     backdrop-filter: blur(25px);
+    align-self: center;
   }
-
-  @media only screen and (max-width: 600px) {
+  .arrow{
+    display: none;
+    
+  }
+  @media only screen and (max-width: 850px) {
     .box{
-      padding: 0px;
-      font-size: 0.3em;
+      padding: 2px;
+      width: 98%;
+      font-size: 0.9em;
+      display: flex;
+
+    }
+    .cityF{
+      margin: 5px;
     }
     .dayI{
-      margin: 8px;
-      padding: 0px;
+      min-width: 100px;
+      border-radius: 10px;
+      margin: 5px;
     }
+    .arrow{
+      color: #fbfbfb;
+      display: flex;
+      align-items: center;
+      font-size: 50px;
+      max-width: 30px;
+    }
+    /*
     .iconI{
       width: 20px;
-    }
+    } */
 }

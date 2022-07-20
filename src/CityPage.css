@@ -54,7 +54,6 @@
     display: flex;
     margin: 10px;
     border-bottom: 1px solid;
-    overflow-x: scroll;
 }
 .dayI{
     margin: 10px;
@@ -93,6 +92,7 @@
     }
     .cityF{
       margin: 5px;
+      overflow-x: scroll;
     }
     .dayI{
       min-width: 100px;

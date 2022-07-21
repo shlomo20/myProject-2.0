@@ -25,7 +25,16 @@
     margin: 2em;
     position: relative;
   }
-  
+  .new{
+    position: absolute;
+    bottom: 10px;
+    right: 10px;
+    background: #6bff55;
+    border-radius: 14px;
+    padding: 8px;
+    color: #000;
+    font-weight: 700;
+  }
   .tran {
     position: absolute;
     top: 0;

@@ -30,6 +30,7 @@ function App() {
   const [showSettings, setShowSettings] =useState(false)
   const [isLoading, setIsLoading] = useState(true)
   const [settingHasChanges,setSettingsHasChanges] = useState(false)
+  const [searchAmount, setSearchAmount] = useState(0)
 
   async function getCitiesData(uid){
     var res = await fetch( URL +'/data/weather/foruser?uid='+ uid)
@@ -96,10 +97,11 @@ function App() {
        
         const disCity = {
           "name": d.region, 
-          "info": 222, 
+          "info": true, 
           "zip": d.region.split(",")[1].replace(/[^0-9]/g,''), 
           "country": "us"}
-        setCities(prev => ([...prev,disCity]))  
+        setCities(prev => ([disCity,...prev]))  
+        setSearchAmount(prev => prev + 1)
       }
       else{
         setCities(prev => ([...prev,tempCities[c]]))  

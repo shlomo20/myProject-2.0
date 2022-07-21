@@ -41,7 +41,7 @@ import merge from "lodash/merge"
       const { f } = el.currentConditions.temp;
       const { mile } = el.currentConditions.wind;
       return(
-        <Link key={el.zip} to={`/c/${el.name}`} state={el}><MainCard key={el.zip} cityName={el.name } temp={f} icon={iconURL} humidity={humidity} speed={mile} description={comment}/></Link> 
+        <Link key={el.zip} to={`/c/${el.name}`} state={el}><MainCard key={el.zip} info={el.info} cityName={el.name } temp={f} icon={iconURL} humidity={humidity} speed={mile} description={comment}/></Link> 
        )
     }
   })  

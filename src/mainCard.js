@@ -10,6 +10,7 @@ export default function Card(props)
 
     return(
      <button className="card">
+            {props.info && (<div className="new">NEW</div>)}
             <div className="weather ">
                 <h2 className="city">Weather in {props.cityName}</h2>
                 <h1 className="temp"> {props.temp}°f</h1>

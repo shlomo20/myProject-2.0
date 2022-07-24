@@ -1,6 +1,6 @@
 import React , {useState} from 'react'
 import {auth,} from '../../firebase-config'
-import{ createUserWithEmailAndPassword, signInWithEmailAndPassword,signInWithEmailLink,
+import{ onAuthStateChanged,signOut, createUserWithEmailAndPassword, signInWithEmailAndPassword,signInWithEmailLink,
   signInWithPopup, GoogleAuthProvider, GithubAuthProvider,} from 'firebase/auth'
 import "./login.css"
 
@@ -62,38 +62,54 @@ export default function Login(props) {
     
   }
 
-
   const changeIsRegistered = ()=>{
     setIsRegistered(!isRegistered)
   }
 
-  return (
-    <div>
-      <div>
-        <h3>1 Click Sign In</h3>
-        <button className='buttonB'  onClick={signInWithGmail}><ion-icon id="ic"name="logo-google"></ion-icon></button>
-        <button className='buttonB'  onClick={signInWithGitHub}><ion-icon id="ic" name="logo-github"></ion-icon></button>
-      </div>
-      {isRegistered? 
+  const logout = async ()=>{
+    await signOut(auth);
+  }
+  const page = () => {
+    if(props.user === null){
+      return (
         <div>
           <div>
-            <h3> Login</h3>
-            <input className='loginButton' placeholder='Email...' value={loginEmail} onChange={(e)=> setLoginEmail(e.target.value)}/>
-            <input className='loginButton' placeholder='Password... ' value={loginPassword} onChange={(e)=> setLoginPassword(e.target.value)}/>
-            <button className='loginButton' onClick={login}>Login</button>
+            <h3>1 Click Sign In</h3>
+            <button className='buttonB'  onClick={signInWithGmail}><ion-icon id="ic"name="logo-google"></ion-icon></button>
+            <button className='buttonB'  onClick={signInWithGitHub}><ion-icon id="ic" name="logo-github"></ion-icon></button>
           </div>
-          <p>Don't have a login register <button className='changeR' onClick={changeIsRegistered}>Here</button> </p>
-        </div> : 
-        <div>
-           <div>
-              <h3>Register User</h3>
-              <input className='loginButton' placeholder='Email...' value={registerEmail} onChange={(e)=> setRegisterEmail(e.target.value)}/>
-              <input className='loginButton' placeholder='Password...' value={registerPassword} onChange={(e)=> setRegisterPassword(e.target.value)}/>
-              <button className='loginButton'  onClick={register}>Create User</button>
+          {isRegistered? 
+            <div>
+              <div>
+                <h3> Login</h3>
+                <input className='loginButton' placeholder='Email...' value={loginEmail} onChange={(e)=> setLoginEmail(e.target.value)}/>
+                <input className='loginButton' placeholder='Password... ' value={loginPassword} onChange={(e)=> setLoginPassword(e.target.value)}/>
+                <button className='loginButton' onClick={login}>Login</button>
+              </div>
+              <p>Don't have a login register <button className='changeR' onClick={changeIsRegistered}>Here</button> </p>
+            </div> : 
+            <div>
+              <div>
+                  <h3>Register User</h3>
+                  <input className='loginButton' placeholder='Email...' value={registerEmail} onChange={(e)=> setRegisterEmail(e.target.value)}/>
+                  <input className='loginButton' placeholder='Password...' value={registerPassword} onChange={(e)=> setRegisterPassword(e.target.value)}/>
+                  <button className='loginButton'  onClick={register}>Create User</button>
+                </div>
+              <p> Do you have a login Sign In <button className='changeR' onClick={changeIsRegistered}>Here</button> </p>
             </div>
-          <p> Do you have a login Sign In  <button className='changeR' onClick={changeIsRegistered}>Here</button> </p>
+          }
         </div>
-      }
-    </div>
-  )
+      )
+    }
+    else{
+      return (
+        <div>
+          <img src={props.user.photoURL} alt='user'/>
+          <h3>Welcome {props.user.displayName}</h3>
+          <button className='buttonB' onClick={logout}>Sign Out</button>
+        </div>
+      )
+    }
+  }
+  return ( page() ) 
 }

@@ -5,14 +5,13 @@ import styled from 'styled-components';
 import './settings.css'
 import Login from './login';
 import {auth} from '../../firebase-config'
-import {onAuthStateChanged,signOut} from 'firebase/auth'
+import {onAuthStateChanged} from 'firebase/auth'
 
 
 const List = styled.div``;
 const Container = styled.div``;
 
 export default function Settings(props){
-    const [user,setUser] = useState('')
     const [savedCities, setSavedCities ] = useState([])
     const [newCity, setNewCity] = useState({
         name: '',
@@ -68,14 +67,12 @@ export default function Settings(props){
 
     useEffect(()=>{
         onAuthStateChanged(auth,(currentUser)=>{
-                setUser(currentUser)
-                console.log( currentUser)
-                if( currentUser!= null){
+                if( props.user!= null){
                     f()
                 }
             }
         )
-    },[auth] )
+    },[] )
 
     useEffect(()=>{
         if(props.SettingsHasChanges == false){
@@ -84,10 +81,6 @@ export default function Settings(props){
             }
         }
     },[props.SettingsHasChanges])
-
-    const logout = async ()=>{
-        await signOut(auth);
-    }
 
     const onDragEnd = result =>{
         const {destination, source, draggableId } = result;
@@ -116,7 +109,6 @@ export default function Settings(props){
         setSavedCities(savedCitiesOrder)
         props.setSettingsHasChanges(true)
     }
-
     const deleteCity = (e)=>{
         console.log(e.target.id)
         let cityIndex = 0
@@ -218,13 +210,21 @@ export default function Settings(props){
                 <button>Add city</button>
             </form>
         </div>
-        <button className='loginButton' onClick={logout}>Sign Out</button>
+     
         </>)
+    }
+    const nli = ()=>{
+        return(
+            <div className='nli'>
+                <h1>No Saved Cities</h1>
+                <p>You have not saved any cities. Please add a city to your list.</p>
+            </div>
+        )
     }
     
     return(
         <div className="sPage">
-            {!user?  <Login user={user}/>: Page() }
+            {!props.user?  nli():  Page() }
         </div>
     )
 }

@@ -4,7 +4,7 @@ import { DragDropContext, Droppable, Draggable } from 'react-beautiful-dnd';
 import styled from 'styled-components';
 import './settings.css'
 import Login from './login';
-import {auth} from './firebase-config'
+import {auth} from '../../firebase-config'
 import {onAuthStateChanged,signOut} from 'firebase/auth'
 
 

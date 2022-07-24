@@ -1,5 +1,5 @@
 import React , {useState} from 'react'
-import {auth,} from './firebase-config'
+import {auth,} from '../../firebase-config'
 import{ createUserWithEmailAndPassword, signInWithEmailAndPassword,signInWithEmailLink,
   signInWithPopup, GoogleAuthProvider, GithubAuthProvider,} from 'firebase/auth'
 import "./login.css"

@@ -1,3 +1,16 @@
+
+.settingsPage{
+    display: flex;
+    flex-direction: row;
+    background-color: rgba(0, 0, 0, 0.863);
+    color: #fff;
+}
+.sittingsNav{
+
+}
+.dBox{
+    margin-bottom: 50px;
+}
 .sPage{
     background-color: rgba(0, 0, 0, 0.863);
     color: #fff;
@@ -9,9 +22,6 @@
     width: fit-content;
     min-height: 80%;
     max-width: 70%;
-}
-.dBox{
-    margin-bottom: 50px;
 }
 .icfl {
     display: flex;

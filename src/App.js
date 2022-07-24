@@ -1,10 +1,10 @@
 import React,{useState, useEffect} from 'react';
 import{BrowserRouter as Router,Routes,Route}from'react-router-dom';
 import './App.css';
-import Nav from './Nav';
+import Nav from './sheared/Nav';
 import HomePage from './main'
-import About from './About';
-import Contact from './Contact';
+import About from './sheared/About';
+import Contact from './sheared/Contact';
 import LogIn from './login';
 import CityPage from './CityPage'
 import Settings from  './settings'

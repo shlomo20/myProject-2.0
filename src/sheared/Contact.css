@@ -1,6 +1,6 @@
 
 #contact{
-    background-image: url("./assets/img/backg.jpg");
+    background-image: url(".././assets/img/backg.jpg");
     background-size: 100% 100%;
     background-repeat: no-repeat;
     overflow: hidden;
@@ -15,7 +15,7 @@
     
 }
 .iconOwn{
-    background-image: URL('./assets/img/profile-pic.png');
+    background-image: URL('.././assets/img/profile-pic.png');
     height: 30px;
     width: 30px;
     background-size: 100% 30px;

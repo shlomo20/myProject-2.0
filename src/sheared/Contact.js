@@ -1,6 +1,6 @@
 import React from "react";
 import "./Contact.css";
-import TextAnimation from "./animations/TextAnimation";
+import TextAnimation from ".././animations/TextAnimation";
 
 
 export default function Contact()

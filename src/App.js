@@ -207,7 +207,7 @@ function App() {
                 <Route path="/contact" element={<Contact/>}/>
                 <Route path='/c/:id' element={<CityPage ActivateMe={handelActive}/>} /> 
               </Routes>
-              { showSettings ?<Settings SettingsHasChanges={settingHasChanges} setSettingsHasChanges={handelSettings} CloseSettings={handelActive} />:""}
+              { showSettings ?<Settings ActivateMe={handelActive} SettingsHasChanges={settingHasChanges} setSettingsHasChanges={handelSettings} CloseSettings={handelActive} />:""}
             </div>
       </Router>
     </>

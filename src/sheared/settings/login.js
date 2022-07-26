@@ -71,26 +71,29 @@ export default function Login(props) {
   }
   const page = () => {
     if(props.user === null){
-      return (
-        <div>
+      return (<>
+        <div className='pr'>Login</div>
+        <div className='loginP'>
+          
           <div>
-            <h3>1 Click Sign In</h3>
+            <h4>Signal Click Sign In Continue With </h4>
             <button className='buttonB'  onClick={signInWithGmail}><ion-icon id="ic"name="logo-google"></ion-icon></button>
+            or
             <button className='buttonB'  onClick={signInWithGitHub}><ion-icon id="ic" name="logo-github"></ion-icon></button>
           </div>
           {isRegistered? 
             <div>
               <div>
-                <h3> Login</h3>
+                <h4> Login</h4>
                 <input className='loginButton' placeholder='Email...' value={loginEmail} onChange={(e)=> setLoginEmail(e.target.value)}/>
                 <input className='loginButton' placeholder='Password... ' value={loginPassword} onChange={(e)=> setLoginPassword(e.target.value)}/>
                 <button className='loginButton' onClick={login}>Login</button>
               </div>
-              <p>Don't have a login register <button className='changeR' onClick={changeIsRegistered}>Here</button> </p>
+              <p>No account? <button className='changeR' onClick={changeIsRegistered}>Create One Here</button> </p>
             </div> : 
             <div>
               <div>
-                  <h3>Register User</h3>
+                  <h4>Register User</h4>
                   <input className='loginButton' placeholder='Email...' value={registerEmail} onChange={(e)=> setRegisterEmail(e.target.value)}/>
                   <input className='loginButton' placeholder='Password...' value={registerPassword} onChange={(e)=> setRegisterPassword(e.target.value)}/>
                   <button className='loginButton'  onClick={register}>Create User</button>
@@ -98,18 +101,28 @@ export default function Login(props) {
               <p> Do you have a login Sign In <button className='changeR' onClick={changeIsRegistered}>Here</button> </p>
             </div>
           }
-        </div>
+        </div></>
       )
     }
     else{
-      return (
-        <div>
-          <img src={props.user.photoURL} alt='user'/>
-          <h3>Welcome {props.user.displayName}</h3>
-          <button className='buttonB' onClick={logout}>Sign Out</button>
+      return (<>
+      <div className='pr'>Profile</div>
+        <div className='loginP'>
+          <div className='profileSec'>
+            <h4>Welcome {props.user.displayName}</h4>
+            <h4> {props.user.loginEmail}</h4>
+            <img className='proPho' src={props.user.photoURL ?props.user.photoURL : 'https://png.pngitem.com/pimgs/s/146-1468281_profile-icon-png-transparent-profile-picture-icon-png.png' } alt='user'/>
+          </div>
+          <button className='' onClick={logout}>Sign Out</button>
         </div>
+      </>
       )
     }
   }
-  return ( page() ) 
+  return ( 
+    <div>
+      
+      {page()}
+    </div>
+  ) 
 }

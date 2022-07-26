@@ -22,9 +22,12 @@ export default function Settings (props){
     }
     const Page = () => {
         if(showPage === 'login'){
-            return <Login user={user}/>
+            return <div className='pages' ><Login user={user}/></div>
         }else if(showPage === 'citySettings'){
-            return <CitySettings SettingsHasChanges={props.settingHasChanges} setSettingsHasChanges={props.setSettingsHasChanges} user={user} />
+            return (
+            <div className='pages' >
+                <CitySettings  SettingsHasChanges={props.settingHasChanges} setSettingsHasChanges={props.setSettingsHasChanges} user={user} />
+            </div>)
         }
         else{
             return <div>404</div>
@@ -33,10 +36,17 @@ export default function Settings (props){
     return(
         <div className='settingsPage'>
             <div className='sittingsNav'>
-                <button onClick={()=> handelPage('login')}>Login</button>
-                <button onClick={()=> handelPage('citySettings')}>City Settings</button>
+                <button className='sittingsB' onClick={()=> handelPage('login')}>
+                    <ion-icon name="people-circle-outline"></ion-icon>
+                    <p>Login</p>
+                </button>
+                <button className='sittingsB' onClick={()=> handelPage('citySettings')}>
+                    <ion-icon name="earth-outline"></ion-icon>
+                    <p>Cities Settings</p>
+                </button>
             </div>
             {Page()}
+            <button className='ex'  onClick={()=> props.ActivateMe("settings")}><ion-icon name="close-circle-outline"></ion-icon></button>
         </div>
     )
 }

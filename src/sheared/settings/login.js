@@ -83,19 +83,31 @@ export default function Login(props) {
           </div>
           {isRegistered? 
             <div>
-              <div>
+              <div className='forms'>
                 <h4> Login</h4>
-                <input className='loginButton' placeholder='Email...' value={loginEmail} onChange={(e)=> setLoginEmail(e.target.value)}/>
-                <input className='loginButton' placeholder='Password... ' value={loginPassword} onChange={(e)=> setLoginPassword(e.target.value)}/>
+                <div className='inputF'>
+                  <input className='' value={loginEmail} onChange={(e)=> setLoginEmail(e.target.value)}/>
+                  <span>Email</span>
+                </div>
+                <div className='inputF'>
+                  <input type='password' className='' value={loginPassword} onChange={(e)=> setLoginPassword(e.target.value)}/>
+                  <span>Password</span>
+                </div>
                 <button className='buttonB' onClick={login}>Login</button>
               </div>
               <p>No account? <button className='changeR' onClick={changeIsRegistered}>Create One Here</button> </p>
             </div> : 
             <div>
-              <div>
+              <div className='forms'>
                   <h4>Register User</h4>
-                  <input className='loginButton' placeholder='Email...' value={registerEmail} onChange={(e)=> setRegisterEmail(e.target.value)}/>
-                  <input className='loginButton' placeholder='Password...' value={registerPassword} onChange={(e)=> setRegisterPassword(e.target.value)}/>
+                  <div className='inputF'>
+                    <input className='' value={registerEmail} onChange={(e)=> setRegisterEmail(e.target.value)}/>
+                    <span>Email</span>
+                 </div>
+                  <div className='inputF'>  
+                    <input className='' value={registerPassword} onChange={(e)=> setRegisterPassword(e.target.value)}/>
+                    <span>Password</span>
+                  </div>
                   <button className='buttonB'  onClick={register}>Create User</button>
                 </div>
               <p> Do you have a login Sign In <button className='changeR' onClick={changeIsRegistered}>Here</button> </p>
@@ -106,7 +118,7 @@ export default function Login(props) {
     }
     else{
       return (<>
-      <div className='pr'>Profile</div>
+      <div className='pr'>Profile / My Account</div>
         <div className='loginP'>
           <div className='profileSec'>
             <img className='proPho' src={props.user.photoURL ?props.user.photoURL : 'https://png.pngitem.com/pimgs/s/146-1468281_profile-icon-png-transparent-profile-picture-icon-png.png' } alt='user'/>

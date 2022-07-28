@@ -191,10 +191,16 @@ export default function Settings(props){
     const Page = ()=>{
         return(<div className='citySettings'>
             <div className='addCity'>
-                <form className='acf' onSubmit={addCity}>
-                    <input  className="input " type="text" placeholder="City Name" onChange={(e)=> setNewCity({...newCity, name: e.target.value})}  value={newCity.name}  required />
-                    <input  className="input" type="text" placeholder="Zip Code" onChange={(e)=> setNewCity({...newCity, zip: e.target.value})}  value={newCity.zip}  required />
-                    <button>Add city</button>
+                <form className='acf forms' onSubmit={addCity}>
+                    <div className='inputF'> 
+                        <input  className=" " type="text" onChange={(e)=> setNewCity({...newCity, name: e.target.value})}  value={newCity.name}  required />
+                        <span>City Name</span>
+                    </div>
+                    <div className='inputF'> 
+                        <input  className="" type="text"  onChange={(e)=> setNewCity({...newCity, zip: e.target.value})}  value={newCity.zip}  required />
+                        <span>Zip Code</span>
+                    </div> 
+                    <button className='buttonB'>Add city</button>
                 </form>
             </div>
             <div className={!dragMode? 'dBox': 'dBox dragMode'}> 

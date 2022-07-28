@@ -13,8 +13,13 @@
 .settings-header{
     display: flex;
     flex-direction: column;
-    background: var(--color2);
+    background: var(--color1);
     padding: 5px;
+    height: 40px;
+    border-bottom: 2px solid var(--color2);
+    color: var(--color3);
+    justify-content: center;
+    font-weight: bold;
 }
 .settingsPage{
     display: flex;
@@ -23,7 +28,7 @@
     color: var(--color3);
     width: 600px;    
     position: absolute;
-    top: 0px;
+    top: 40px;
     height: 100%;
     
 
@@ -48,7 +53,6 @@
 .pages{
     border: none;
     background-color: #181820;
-    border-left: 1px solid var(--color3);
     width: 100%;
     padding: 20px;
 }
@@ -77,8 +81,43 @@ p{
     border-radius: 50px;
     height: 25px;
 }
-
-
+.forms{
+    display: flex;
+    flex-direction: column;
+    padding: 10px;
+    gap: 15px;
+}
+.inputF {
+    position: relative;
+    width: 250px
+}
+.inputF input{ 
+    width: 100%;
+    padding: 10px;
+    border: 1px solid rgb(255, 255,255, 0.25);
+    background: transparent;
+    border-radius: 5px;
+    outline: none;
+    color: var(--color3);
+    font-size: 1em;
+    transition: 0.5s;
+}
+.inputF span{
+    position: absolute;
+    left: 0px;
+    padding: 10px;
+    pointer-events: none;
+    font-size: 1em;
+    color: rgb(255, 255,255, 0.25);
+    text-transform: uppercase;
+}
+.inputF input:focus ~ span{
+    color: #29fd53;
+    transform: translateX(10px) translateY(-7px);
+    font-size: 0.75em;
+    padding: 0 10px;
+    background-color: var(--color2);
+}
 
 .acf{
     display: flex;

@@ -36,4 +36,7 @@
     color: #000;
     background: none;
     text-decoration: underline;
+    border: none;
+    color: var(--color3);
+    
 }

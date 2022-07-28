@@ -8,7 +8,12 @@
   font-family: "Poopins", sans-serif;
 }
 :root {
-  --color: #222327;
+  --color1: #21212b;
+  --color2: #181820;
+  --color3: #e0e0e1;
+}
+body{
+  background: var(--color2)
 }
 .maWtSe{
   display: flex;

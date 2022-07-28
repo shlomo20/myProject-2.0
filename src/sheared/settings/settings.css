@@ -1,17 +1,45 @@
-
+.settingsMP{
+    display: flex;
+    flex-direction: column;
+    width: 600px; 
+    position: fixed;
+    right: 0px;
+    min-height: 80%;
+    border-radius: 15px;
+    overflow: hidden;
+    margin: 5px;
+    border: 1px solid var(--color3);
+}
+.settings-header{
+    display: flex;
+    flex-direction: column;
+    background: var(--color2);
+    padding: 5px;
+}
 .settingsPage{
     display: flex;
     flex-direction: row;
-    background-color:rgb(194 194 194 / 95%);
-    color: rgb(0, 0, 0);
+    background-color: var(--color1);
+    color: var(--color3);
     width: 600px;    
-    border-radius: 15px;
-    position: fixed;
-    right: 0px;
-    height: 82%;
-    margin: 5px;
-    overflow: hidden;
-    border: 1px solid;
+    position: absolute;
+    top: 0px;
+    height: 100%;
+    
+
+}
+.buttonB {
+    color: rgb(224 224 225);
+    margin: 10px;
+    padding: 5px;
+    min-width: 110px;
+    min-height: 40px;
+    width: fit-content;
+    border: 2px solid transparent;
+    border-radius: 10px;
+    background: linear-gradient(to right, #414052, #414052), radial-gradient(circle at 50% 50%, #c70fff, #a510ff, #5114ff, #1951fe, #1fcffe, #24fdbe, #28fd70, #29fd53);
+    background-clip: padding-box, border-box;
+    background-origin: padding-box, border-box;
 }
 .sittingsNav{
     padding-top: 15px;
@@ -19,13 +47,14 @@
 }
 .pages{
     border: none;
-    border-left: 1px solid rgb(0, 0, 0);
+    background-color: #181820;
+    border-left: 1px solid var(--color3);
     width: 100%;
     padding: 20px;
 }
 .sittingsB{
     background: none;
-    color: rgb(0, 0, 0);
+    color: var(--color3);
     width: 100%;
     border: none;
     font-size: 15px;
@@ -38,6 +67,7 @@ p{
     padding-left: 5px;
 }
 .ex{
+    color: var(--color3);
     position: absolute;
     right: 6px;
     top: 6px;
@@ -47,35 +77,9 @@ p{
     border-radius: 50px;
     height: 25px;
 }
-.dBox{
-    margin-bottom: 50px;
-}
-.sPage{
-    color: #000;
-    padding: 30px;
-    z-index: 3;
-    display: flex;
-    flex-direction: column;
-    align-items: flex-end;
-    width: 100%;
-    min-height: 80%;
-}
-.icfl {
-    display: flex;
-    gap: 10px;
-    background: #29fd53b8;
-    border: 1px solid #fff;
-    border-radius: 15px;
-    margin: 5px;
-    width: fit-content;
-    padding: 8px;
-}
-.Corder{
-    border: 1px solid #000;
-    border-radius: 50%;
-    width: 20px;
-    padding-left: 4px;
-}
+
+
+
 .acf{
     display: flex;
     flex-direction: column;

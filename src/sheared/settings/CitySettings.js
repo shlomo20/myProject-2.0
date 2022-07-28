@@ -2,7 +2,7 @@
 import React,{useState,useEffect } from 'react'
 import { DragDropContext, Droppable, Draggable } from 'react-beautiful-dnd';
 import styled from 'styled-components';
-import './settings.css'
+import './citySettings.css'
 import Login from './login';
 import {auth} from '../../firebase-config'
 import {onAuthStateChanged} from 'firebase/auth'
@@ -18,6 +18,7 @@ export default function Settings(props){
         zip: '',
         cityId: Math.random()+ Math.random()
     })
+    const [dragMode, setDragMode] = useState(false)
     const userId = auth.currentUser? auth.currentUser.uid: "1"
 
     async function f(){
@@ -83,6 +84,7 @@ export default function Settings(props){
     },[props.SettingsHasChanges])
 
     const onDragEnd = result =>{
+        setDragMode(false)
         const {destination, source, draggableId } = result;
        if(!destination){
         return;
@@ -108,6 +110,7 @@ export default function Settings(props){
         console.log(savedCitiesOrder)
         setSavedCities(savedCitiesOrder)
         props.setSettingsHasChanges(true)
+        
     }
     const deleteCity = (e)=>{
         console.log(e.target.id)
@@ -175,43 +178,49 @@ export default function Settings(props){
         return(
             <Draggable key={e.order} draggableId={e.order.toString()} index={index}>{provided =>
                 <Container className='icfl' {...provided.draggableProps} ref={provided.innerRef}>
-                    <div className='Corder'>{parseInt(e.order) + 1}</div>
-                    {e.name +"  "+e.zip}
-                    <ion-icon {...provided.dragHandleProps} name="swap-vertical-outline"></ion-icon>
-                    <button id={e.name} onClick={deleteCity}>< ion-icon  id={e.name} name="trash-outline"></ion-icon></button>
+                    <div className='Corder'>{parseInt(e.order) + 1}.</div>
+                    <div className="tx1">{e.name}</div>
+                    <div className="tx2">{e.zip}</div>
+                    <div className='move'><ion-icon {...provided.dragHandleProps} name="swap-vertical-outline"></ion-icon></div>
+                    <button className='del' id={e.name} onClick={deleteCity}>< ion-icon  id={e.name} name="trash-outline"></ion-icon></button>
                 </Container>
             }
             </Draggable>)
     });
     
     const Page = ()=>{
-        return(<>
-            <div className='dBox'> 
-            <DragDropContext onDragEnd={onDragEnd}>
-                {
-                    <Droppable key='1' droppableId="1">{provided =>
-                        <List key='2'  ref={provided.innerRef} {...provided.droppableProps}>
-                            {provided.placeholder}
-                            {Sc}
-                        </List>
+        return(<div className='citySettings'>
+            <div className='addCity'>
+                <form className='acf' onSubmit={addCity}>
+                    <input  className="input " type="text" placeholder="City Name" onChange={(e)=> setNewCity({...newCity, name: e.target.value})}  value={newCity.name}  required />
+                    <input  className="input" type="text" placeholder="Zip Code" onChange={(e)=> setNewCity({...newCity, zip: e.target.value})}  value={newCity.zip}  required />
+                    <button>Add city</button>
+                </form>
+            </div>
+            <div className={!dragMode? 'dBox': 'dBox dragMode'}> 
+                    <div className='header'>
+                        <div>Order</div>
+                        <div className="tx1">City Name</div>
+                        <div className="tx2">ZipCode</div>
+                        <div className='act'>Actions</div>
+                    </div>
+                <DragDropContext className={!dragMode? '': 'dragMode'} onDragEnd={onDragEnd} onDragStart={()=> setDragMode(true)}>
+                    {
+                        <Droppable  key='1' droppableId="1">{provided =>
+                            <List key='2'  ref={provided.innerRef} {...provided.droppableProps}>
+                                {provided.placeholder}
+                                {Sc}
+                            </List>
+                        }
+                        </Droppable>
                     }
-                    </Droppable>
-                }
-            </DragDropContext>
-        </div>
-        <div>
-            <button onClick={disregardChanges}>Disregard Changes</button>
-            <button onClick={SaveSettings}>Save Settings</button>
-        </div>
-        <div>
-            <form className='acf' onSubmit={addCity}>
-                <input  className="input " type="text" placeholder="City Name" onChange={(e)=> setNewCity({...newCity, name: e.target.value})}  value={newCity.name}  required />
-                <input  className="input" type="text" placeholder="Zip Code" onChange={(e)=> setNewCity({...newCity, zip: e.target.value})}  value={newCity.zip}  required />
-                <button>Add city</button>
-            </form>
-        </div>
-     
-        </>)
+                </DragDropContext>
+            </div>
+            <div>
+                <button className='buttonB' onClick={disregardChanges}>Disregard Changes</button>
+                <button className='buttonB'onClick={SaveSettings}>Save Settings</button>
+            </div>
+        </div>)
     }
     const nli = ()=>{
         return(
@@ -223,7 +232,7 @@ export default function Settings(props){
     }
     
     return(
-        <div className="sPage">
+        <div>
             {!props.user?  nli():  Page() }
         </div>
     )

@@ -87,7 +87,7 @@ export default function Login(props) {
                 <h4> Login</h4>
                 <input className='loginButton' placeholder='Email...' value={loginEmail} onChange={(e)=> setLoginEmail(e.target.value)}/>
                 <input className='loginButton' placeholder='Password... ' value={loginPassword} onChange={(e)=> setLoginPassword(e.target.value)}/>
-                <button className='loginButton' onClick={login}>Login</button>
+                <button className='buttonB' onClick={login}>Login</button>
               </div>
               <p>No account? <button className='changeR' onClick={changeIsRegistered}>Create One Here</button> </p>
             </div> : 
@@ -96,7 +96,7 @@ export default function Login(props) {
                   <h4>Register User</h4>
                   <input className='loginButton' placeholder='Email...' value={registerEmail} onChange={(e)=> setRegisterEmail(e.target.value)}/>
                   <input className='loginButton' placeholder='Password...' value={registerPassword} onChange={(e)=> setRegisterPassword(e.target.value)}/>
-                  <button className='loginButton'  onClick={register}>Create User</button>
+                  <button className='buttonB'  onClick={register}>Create User</button>
                 </div>
               <p> Do you have a login Sign In <button className='changeR' onClick={changeIsRegistered}>Here</button> </p>
             </div>
@@ -109,11 +109,11 @@ export default function Login(props) {
       <div className='pr'>Profile</div>
         <div className='loginP'>
           <div className='profileSec'>
-            <h4>Welcome {props.user.displayName}</h4>
-            <h4> {props.user.loginEmail}</h4>
             <img className='proPho' src={props.user.photoURL ?props.user.photoURL : 'https://png.pngitem.com/pimgs/s/146-1468281_profile-icon-png-transparent-profile-picture-icon-png.png' } alt='user'/>
+            <h4 className='proInf'>Welcome <br/>{props.user.displayName}</h4>
+            <h4> {props.user.loginEmail}</h4>
           </div>
-          <button className='' onClick={logout}>Sign Out</button>
+          <button className='buttonB' onClick={logout}>Sign Out</button>
         </div>
       </>
       )

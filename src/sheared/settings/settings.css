@@ -30,18 +30,17 @@ https://ui.glass/generator/#
 .settingsPage{
     display: flex;
     flex-direction: row;
-    background-color: var(--color1);
     color: var(--color3);
     width: 600px;    
     position: absolute;
     top: 40px;
     height: 100%;
-    
-
+    background-color: var(--color2);
 }
 .sittingsNav{
     padding-top: 15px;
     width: 200px;
+    background-color: var(--color1);
 }
 .pages{
     border: none;
@@ -87,8 +86,39 @@ p{
     padding: 10px;
 }
 @media only screen and (max-device-width: 750px) {
-    .sPage{
-        position: fixed;
-        right: 0;
+    .settingsMP{
+        width: 350px;
+    }
+    .settingsPage{
+        width: 350px;
+    }
+    .sittingsNav{
+        max-width: 30px;
+    }
+    .sittingsNav:hover{
+        min-width: 140px;
+        z-index: 6;
+    }
+    .pages{
+        position: Absolute;
+        right: 0px ;
+        width: 320px;
+        overflow: hidden;
+        z-index: 5;
+    }
+    .pages:hover{
+        min-width: 310px;
+        z-index: 6;
+    }
+    #tbr{
+       visibility: hidden;
+       position: relative;
+    }
+    #tbr::after{
+        visibility: visible;
+        content: "MySite";
+        position: absolute;
+        top: 0;
+        left: 0;
     }
 }

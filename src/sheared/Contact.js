@@ -18,7 +18,7 @@ export default function Contact()
                             <div className="iconOwn"></div>Shlomy Friedman
                         </div>
                         <i className="fa fa-envelope"></i> Email: smfwork21@gmail.com<br/>
-                        <i className="fa fa-desktop"></i> My site: <a href="https://sfriedman.vercel.app/">sfriedman.vercel.app</a><br/>
+                        <i className="fa fa-desktop"></i> My site: <a id="tbr" href="https://sfriedman.vercel.app/">sfriedman.vercel.app</a><br/>
                     </div>
                     <p className="git2">Get in touch:</p>
                     <div className="q">

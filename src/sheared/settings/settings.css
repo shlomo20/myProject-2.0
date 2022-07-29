@@ -8,8 +8,14 @@
     border-radius: 15px;
     overflow: hidden;
     margin: 5px;
-    border: 1px solid var(--color3);
+    border: 1px solid rgba(255, 255, 255, 0.125);
+    z-index: 5;
 }
+/* for glassmorphism
+backdrop-filter: blur( 10px );
+-webkit-backdrop-filter: blur( 10px );
+https://ui.glass/generator/#
+ */
 .settings-header{
     display: flex;
     flex-direction: column;
@@ -33,19 +39,6 @@
     
 
 }
-.buttonB {
-    color: rgb(224 224 225);
-    margin: 10px;
-    padding: 5px;
-    min-width: 110px;
-    min-height: 40px;
-    width: fit-content;
-    border: 2px solid transparent;
-    border-radius: 10px;
-    background: linear-gradient(to right, #414052, #414052), radial-gradient(circle at 50% 50%, #c70fff, #a510ff, #5114ff, #1951fe, #1fcffe, #24fdbe, #28fd70, #29fd53);
-    background-clip: padding-box, border-box;
-    background-origin: padding-box, border-box;
-}
 .sittingsNav{
     padding-top: 15px;
     width: 200px;
@@ -67,6 +60,9 @@
     margin: 10px 0 10px 0;
     padding: 10px 0px 10px 10px;
 }
+.sittingsB.SA{
+    color: #28fd70;
+}
 p{
     padding-left: 5px;
 }
@@ -80,50 +76,6 @@ p{
     border: none;
     border-radius: 50px;
     height: 25px;
-}
-.forms{
-    display: flex;
-    flex-direction: column;
-    padding: 10px;
-    gap: 15px;
-}
-.inputF {
-    position: relative;
-    width: 250px
-}
-.inputF input{ 
-    width: 100%;
-    padding: 10px;
-    border: 1px solid rgb(255, 255,255, 0.25);
-    background: transparent;
-    border-radius: 5px;
-    outline: none;
-    color: var(--color3);
-    font-size: 1em;
-    transition: 0.5s;
-}
-.inputF span{
-    position: absolute;
-    left: 0px;
-    padding: 10px;
-    pointer-events: none;
-    font-size: 1em;
-    color: rgb(255, 255,255, 0.25);
-    text-transform: uppercase;
-    transition: 0.3s;
-}
-.inputF input:focus ~ span{
-    color: #29fd53;
-    transform: translateX(10px) translateY(-7px);
-    font-size: 0.75em;
-    padding: 0 10px;
-    background-color: var(--color2);
-    border-left: 1px solid #29fd53;
-    border-right: 1px solid #29fd53;
-    letter-spacing: 0.2em;
-}
-.inputF input:focus {
-    border: 1px solid #29fd53;
 }
 .acf{
     display: flex;

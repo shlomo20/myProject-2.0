@@ -44,11 +44,11 @@ export default function Settings (props){
             </div>
             <div className='settingsPage'>
                 <div className='sittingsNav'>
-                    <button className='sittingsB' onClick={()=> handelPage('login')}>
+                    <button className={showPage==="login" ? 'sittingsB SA' :'sittingsB' } onClick={()=> handelPage('login')}>
                         <ion-icon name="people-circle-outline"></ion-icon>
                         <p>Login</p>
                     </button>
-                    <button className='sittingsB' onClick={()=> handelPage('citySettings')}>
+                    <button className={showPage==="citySettings" ? 'sittingsB SA' :'sittingsB' } onClick={()=> handelPage('citySettings')}>
                         <ion-icon name="earth-outline"></ion-icon>
                         <p>Cities Settings</p>
                     </button>

@@ -22,14 +22,18 @@ export default function Contact()
                     </div>
                     <p className="git2">Get in touch:</p>
                     <div className="q">
-                        <form action="https://formsubmit.io/send/smfwork21@gmail.com" target="_blank">
-                            <div className="q1">
-                                    <input className="input " type="text" placeholder="Name" required name="Name"/>
-                                    <input className="input" type="text" placeholder="Email" required name="Email"/>
+                        <form className="forms" action="https://formsubmit.io/send/smfwork21@gmail.com" target="_blank">
+                            <div className="inputF"  >
+                                <input className="c" type="text" required name="Name"/>
+                                <span style={{color: "black"}} >Name</span>
                             </div>
-                            <div className="q1" >
-                                <label htmlFor="reasons" className="reasons">Reason of Contact </label>
-                                <input className="reason " list="reasons" name="Reason" placeholder="Please choose one"  required/>
+                            <div className="inputF" >
+                                <input className="c" type="text" placeholder="Email" required name="Email"/>
+                                <span style={{color: "black"}}>Email</span>
+                            </div>
+                            <div className="inputF" >
+                                <input style={{placeContent: "black"}} className="plash c" list="reasons" name="Reason" placeholder="Please choose one"  required/>
+                                <span htmlFor="reasons" style={{color: "black"}}>Reason of Contact</span>
                             </div>
                             <div className="list">
                                 <datalist id="reasons">
@@ -40,12 +44,13 @@ export default function Contact()
                                 </datalist>
                             </div>
                                 
-                            <div className="msgBox">
+                            <div className="inputF">
                                 <br/>
-                                <textarea className="msg" type="text" placeholder="Message" cols="40" rows="5"  required name="Message" ></textarea>
+                                <textarea className="c" type="text" cols="40" rows="5"  required name="Message" ></textarea>
+                                <span style={{color: "black"}}>Message</span>
                             </div>
                             <input name="_formsubmit_id" type="text" className="formsubmit_id"/>
-                            <button className="cButton" type="submit">
+                            <button className="buttonB" type="submit">
                                 <i className="fa fa-paper-plane"></i> SEND MESSAGE
                             </button>
                         </form>

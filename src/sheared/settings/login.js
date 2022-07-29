@@ -86,11 +86,11 @@ export default function Login(props) {
               <div className='forms'>
                 <h4> Login</h4>
                 <div className='inputF'>
-                  <input className='' value={loginEmail} onChange={(e)=> setLoginEmail(e.target.value)}/>
+                  <input className='' value={loginEmail} onChange={(e)=> setLoginEmail(e.target.value)} required/>
                   <span>Email</span>
                 </div>
                 <div className='inputF'>
-                  <input type='password' className='' value={loginPassword} onChange={(e)=> setLoginPassword(e.target.value)}/>
+                  <input type='password' className='' value={loginPassword} onChange={(e)=> setLoginPassword(e.target.value)} required/>
                   <span>Password</span>
                 </div>
                 <button className='buttonB' onClick={login}>Login</button>
@@ -101,11 +101,11 @@ export default function Login(props) {
               <div className='forms'>
                   <h4>Register User</h4>
                   <div className='inputF'>
-                    <input className='' value={registerEmail} onChange={(e)=> setRegisterEmail(e.target.value)}/>
+                    <input className='' value={registerEmail} onChange={(e)=> setRegisterEmail(e.target.value)} required/>
                     <span>Email</span>
                  </div>
                   <div className='inputF'>  
-                    <input className='' value={registerPassword} onChange={(e)=> setRegisterPassword(e.target.value)}/>
+                    <input className='' value={registerPassword} onChange={(e)=> setRegisterPassword(e.target.value)} required/>
                     <span>Password</span>
                   </div>
                   <button className='buttonB'  onClick={register}>Create User</button>

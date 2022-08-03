@@ -1,5 +1,6 @@
 import React from "react";
 import './zmanimCard.css'
+import candleLogo from "./assets/img/icons8-candelabra-62.png";
 
 export default function ZmanimCard(props) {
 
@@ -111,7 +112,7 @@ export default function ZmanimCard(props) {
             <img src="./oooo.jpg" alt="" />
           </div>
           <div className="content">
-            <h2 className="rank"><small></small></h2>
+            <h2 className="rank"><img className="ico" src={candleLogo}></img></h2>
             <h4>:הדלקת הנרות</h4>
             <p>{klT}</p>
           </div>
@@ -131,7 +132,7 @@ export default function ZmanimCard(props) {
             <img src="./oooo.jpg" alt="" />
           </div>
           <div className="content">
-            <h2 className="rank"><small>#</small>1</h2>
+            <h2 className="rank"></h2>
             <h4>:רבינו תם</h4>
             <p>{tzeit72minT}</p>
           </div>

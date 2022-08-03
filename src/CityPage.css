@@ -14,6 +14,7 @@
     width: 100%;
     z-index: 2;
     align-items: initial;
+    height: fit-content;
   }
   section#ba::before {
     content: "";

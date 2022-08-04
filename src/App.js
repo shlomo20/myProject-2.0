@@ -33,7 +33,7 @@ function App() {
   const [searchAmount, setSearchAmount] = useState(0)
 
   async function getCitiesData(uid){
-    var res = await fetch( devURL +'/data/weather/foruser?uid='+ uid)
+    var res = await fetch( URL +'/data/weather/foruser?uid='+ uid)
     var data = await res.json()
     var cities = await fetch( URL +'/data/users/user/?uid='+uid)
     var citiesData = await cities.json()
@@ -47,7 +47,7 @@ function App() {
     console.log(`Loaded ${auth.currentUser.email} Cities`);
   }
   async function getDefaultCitiesData(){
-    var res = await fetch( devURL +'/data/weather/foruser?uid=1')
+    var res = await fetch( URL +'/data/weather/foruser?uid=1')
     var data = await res.json()
     var cities = await fetch( URL +'/data/users/user/?uid=1')
     var citiesData = await cities.json()
@@ -81,7 +81,7 @@ function App() {
     async function getCityData(c){
       var req = c.zip === null ?c.name:c.zip
       try{
-        var res = await fetch( devURL +'/data/weather/'+ req )
+        var res = await fetch( URL +'/data/weather/'+ req )
         var rData = await res.json()
         setCitiesWeatherData(prev => ([...prev,rData]))
         var reqStatus ="good" ;

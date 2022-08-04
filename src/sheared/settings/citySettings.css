@@ -60,3 +60,12 @@
     position: absolute;
     right: 40px;
 }
+@media only screen and (max-width: 850px) {
+    .tx1{
+        position: absolute;
+        left: 65px;
+    }
+    .tx2{
+        right: 95px;
+    }
+}

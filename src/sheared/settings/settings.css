@@ -109,6 +109,7 @@ p{
     .pages:hover{
         min-width: 310px;
         z-index: 6;
+        min-height: 200px;
     }
     #tbr{
        visibility: hidden;

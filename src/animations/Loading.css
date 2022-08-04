@@ -120,7 +120,7 @@
     transform: translate(-51%, -50%);
     content: " ";
     display: block;
-    background: #222327;
+    background: var(--color2);
     transform-origin: center;
     z-index: 0;
   }
@@ -162,7 +162,7 @@
     transform: translate(-51%, -50%);
     content: " ";
     display: block;
-    background: #222327;
+    background: var(--color2);
     transform-origin: center;
     z-index: -1;
   }
@@ -210,7 +210,7 @@
     transform: translate(-51%, -50%);
     content: " ";
     display: block;
-    background: #222327;
+    background: var(--color2);
     transform-origin: center;
     z-index: -1;
   }

@@ -86,6 +86,9 @@ export default function CityPage(props)
             <div className='zmanimBox'>
                 {z()}
             </div>
+            <div className='footer'>    
+                <p>zmanim from :</p> Hebcal.com <p></p>
+            </div>
         </section>
 
         

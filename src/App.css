@@ -8,8 +8,100 @@
   font-family: "Poopins", sans-serif;
 }
 :root {
-  --color: #222327;
+  --color1: #21212b;
+  --color2: #181820;
+  --color3: #e0e0e1;
+  --color4: #21212bc9;
+  --color5: #181820bf;
+}
+body{
+  background: var(--color2)
 }
 .maWtSe{
   display: flex;
+}
+
+.buttonB {
+  color: rgb(224 224 225);
+  margin: 10px;
+  padding: 5px;
+  min-width: 110px;
+  min-height: 40px;
+  width: fit-content;
+  border: 2px solid transparent;
+  border-radius: 10px;
+  background: linear-gradient(to right, #414052, #414052), radial-gradient(circle at 50% 50%, #c70fff, #a510ff, #5114ff, #1951fe, #1fcffe, #24fdbe, #28fd70, #29fd53);
+  background-clip: padding-box, border-box;
+  background-origin: padding-box, border-box;
+}
+.buttonB:hover {
+  color: rgb(224 224 225);
+  border: 2px solid transparent;
+  border-radius: 10px;
+  background: linear-gradient(to right, #414052, #414052), radial-gradient(circle at 50% 50%, #c70fff, #a510ff, #5114ff, #1951fe, #1fcffe, #24fdbe, #28fd70, #29fd53);
+  background-clip: padding-box, border-box;
+  background-origin: padding-box, border-box;
+}
+.forms{
+  display: flex;
+  flex-direction: column;
+  padding: 10px;
+  gap: 15px;
+}
+.inputF {
+  position: relative;
+  width: 250px
+}
+.inputF  textarea,
+.inputF input{ 
+  width: 100%;
+  padding: 10px;
+  border: 1px solid rgb(255, 255,255, 0.25);
+  background: transparent;
+  border-radius: 5px;
+  outline: none;
+  color: var(--color3);
+  font-size: 1em;
+  transition: 0.5s;
+}
+.inputF .c{
+  border: 1px solid #000;
+}
+.inputF span{
+  position: absolute;
+  left: 0px;
+  padding: 10px;
+  pointer-events: none;
+  font-size: 1em;
+  color: rgb(255, 255,255, 0.25);
+  text-transform: uppercase;
+  transition: 0.3s;
+}
+.inputF input:valid ~ span,
+.inputF input:focus ~ span,
+.inputF  textarea:valid ~ span,
+.inputF  textarea:focus ~ span{
+  color: #29fd53;
+  transform: translateX(10px) translateY(-7px);
+  font-size: 0.75em;
+  padding: 0 10px;
+  background-color: var(--color2);
+  border-left: 1px solid #29fd53;
+  border-right: 1px solid #29fd53;
+  letter-spacing: 0.2em;
+}
+
+.inputF .c:valid ~ span,
+.inputF .c:focus ~ span,
+.inputF  .c:valid ~ span,
+.inputF  .c:focus ~ span{
+  background-color: #29fd53;
+}
+
+
+.inputF input:valid,
+.inputF input:focus,
+.inputF  textarea:valid,
+.inputF  textarea:focus {
+  border: 1px solid #29fd53;
 }

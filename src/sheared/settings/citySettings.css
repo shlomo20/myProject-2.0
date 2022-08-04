@@ -1,0 +1,71 @@
+
+.citySettings{
+    display: flex;
+    flex-direction: column;
+}
+
+.addCity{
+
+}
+.dBox{
+    margin: 50px 0px 50px 0px;
+    background-color: #21212b;
+    border-radius: 5px;
+    overflow: hidden;
+}
+.dragMode{
+    padding-bottom:50px ;
+}
+.Corder{
+    font-size: 0.8em;
+    padding-left: 4px;
+}
+.header{
+    display: flex;
+    background: #272732;
+    padding: 5px;
+    font-size: 0.8em;
+}
+.icfl {
+    display: flex;
+    gap: 10px;
+    background: #21212b;
+    border-bottom: 1px solid #272732;
+    margin: 5px;
+    width: 97.5%;
+    padding: 8px;
+}
+.tx1{
+    position: absolute;
+    left: 230px;
+}
+.tx2{
+    position: absolute;
+    right: 180px;
+}
+.move{
+    position: absolute;
+    right: 65px;
+}
+.del{
+    background: none;
+    border: none;
+    color: rgb(156, 156, 156);;
+    font-size: 18px;
+    font-weight: bold;
+    position: absolute;
+    right: 35px;
+}
+.act{
+    position: absolute;
+    right: 40px;
+}
+@media only screen and (max-width: 850px) {
+    .tx1{
+        position: absolute;
+        left: 65px;
+    }
+    .tx2{
+        right: 95px;
+    }
+}

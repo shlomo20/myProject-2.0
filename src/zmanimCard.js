@@ -1,26 +1,28 @@
 import React from "react";
 import './zmanimCard.css'
 import candleLogo from "./assets/img/icons8-candelabra-62.png";
+import {CalOptions, Zmanim, Location} from '@hebcal/core';
 
 export default function ZmanimCard(props) {
 
-    console.log(props.zmanimData.times);
-    console.log(props);
-    const { chatzotNight,alotHaShachar,misheyakir,sunrise,sofZmanShma,
-        sofZmanTfilla,chatzot,minchaGedola,minchaKetana,sunset,tzeit72min} = props.zmanimData.times;
+    var zDate = new Date(!props.date ? new Date() : props.date);
 
-    const cn = new Date(chatzotNight);
-    const a = new Date(alotHaShachar);
-    const m = new Date(misheyakir);
-    const s = new Date(sunrise);
-    const szs = new Date(sofZmanShma);
-    const szt = new Date(sofZmanTfilla);
-    const c = new Date(chatzot);
-    const mg = new Date(minchaGedola);
-    const mk = new Date(minchaKetana);
-    const ss = new Date(sunset);
-    const kl = new Date(ss.getTime() - 60000 * 15 );
-    const t72 = new Date(tzeit72min);
+    const zmanim = Zmanim(zDate, props.longitude,props.latitude,);
+    console.log();
+
+
+    const cn = zmanim.chatzotNight();
+    const a =  zmanim.alotHaShachar();
+    const m =  zmanim.misheyakir();
+    const s =  zmanim.sunrise();
+    const szs =  zmanim.sofZmanShma();
+    const szt =  zmanim.sofZmanTfilla();
+    const c =  zmanim.chatzot();
+    const mg =  zmanim.minchaGedola();
+    const mk =  zmanim.minchaKetana();
+    const ss =  zmanim.sunset();
+    const kl =  zmanim.sunset().getTime() - 60000 * 15 ;
+    const t72 =  zmanim.tzeit72min();
     const chatzotNightT = cn.toLocaleTimeString('en-US');
     const alotHaShacharT = a.toLocaleTimeString('en-US');
     const misheyakirT = m.toLocaleTimeString('en-US');

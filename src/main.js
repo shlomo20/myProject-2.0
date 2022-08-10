@@ -3,6 +3,7 @@ import { Link} from 'react-router-dom'
 import './main.css'
 import MainCard from './mainCard'
 import merge from "lodash/merge"
+import Search from './components/search'
 
 
  function Main(props){
@@ -57,7 +58,7 @@ import merge from "lodash/merge"
 
   return(
     <div className='main'>  
-    <div className="search">
+    {/* <div className="search">
       <form className='form' onSubmit={submitSearch}>
       <input type="text" className="search-bar" name="search"  value={searchData.search} placeholder="Search" onChange={handelSearchData} />
             <button className="button"  type="submit" ><i className="fa fa-search" aria-hidden="true"></i>
@@ -66,6 +67,9 @@ import merge from "lodash/merge"
       {error?<div className='error'>We are sorry! but we currently only support search by zipcode, 
         we are working on adding search by city, please change your search 
         to a zipcode or double check your zipcode has  5 digits </div>:""}       
+    </div> */}
+    <div className="search">
+      <Search/>
     </div>
     <div className='mainContent'>
       {weatherDataEl}

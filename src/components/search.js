@@ -40,7 +40,12 @@ export function Search (props) {
         if(e.label == null){
             return "";
         }
-        props.submitSearch(e);
+        if(props.submitSearch) {
+            props.submitSearch(e);
+        }
+        else if(props.submitNewCity) {
+            props.submitNewCity(e);
+        }
     }
     
     return(

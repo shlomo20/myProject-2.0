@@ -6,6 +6,7 @@ import './citySettings.css'
 import Login from './login';
 import {auth} from '../../firebase-config'
 import {onAuthStateChanged} from 'firebase/auth'
+import Search from '../../components/search';
 
 
 const List = styled.div``;
@@ -152,25 +153,19 @@ export default function Settings(props){
         f()
     }
     const addCity = async (e)=>{
-        e.preventDefault()
 
         //create a post request to create a city
         const requestOptions = {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify({  name:newCity.name, zip:newCity.zip, cityId:newCity.cityId })
+            body: JSON.stringify(e.value)
         };
         const response = await fetch(process.env.REACT_APP_BE_URL+ "/data/cities/createCity", requestOptions)
         const data = await response.json();
         console.log(data)
-        const city = {order: savedCities.length , id:data.cityId, name:newCity.name,zip: newCity.zip, _id :data._id}
+        const city = {order: savedCities.length , id:data.geonameId, label:data.label, _id :data._id}
         const allData = [...savedCities, city]
         setSavedCities(allData)
-        setNewCity({
-            name: '',
-            zip: '',
-            cityId: Math.random() + Math.random()
-        })
         props.setSettingsHasChanges(true)
     }
 
@@ -179,8 +174,7 @@ export default function Settings(props){
             <Draggable key={e.order} draggableId={e.order.toString()} index={index}>{provided =>
                 <Container className='icfl' {...provided.draggableProps} ref={provided.innerRef}>
                     <div className='Corder'>{parseInt(e.order) + 1}.</div>
-                    <div className="tx1">{e.name}</div>
-                    <div className="tx2">{e.zip}</div>
+                    <div className="tx1">{e.label}</div>
                     <div className='move'><ion-icon {...provided.dragHandleProps} name="swap-vertical-outline"></ion-icon></div>
                     <button className='del' id={e.name} onClick={deleteCity}>< ion-icon  id={e.name} name="trash-outline"></ion-icon></button>
                 </Container>
@@ -191,7 +185,7 @@ export default function Settings(props){
     const Page = ()=>{
         return(<div className='citySettings'>
             <div className='addCity'>
-                <form className='acf forms' onSubmit={addCity}>
+                {/* <form className='acf forms' onSubmit={addCity}>
                     <div className='inputF'> 
                         <input  className=" " type="text" onChange={(e)=> setNewCity({...newCity, name: e.target.value})}  value={newCity.name}  required />
                         <span>City Name</span>
@@ -201,13 +195,13 @@ export default function Settings(props){
                         <span>Zip Code</span>
                     </div> 
                     <button className='buttonB'>Add city</button>
-                </form>
+                </form> */}
+                <Search submitNewCity={addCity} />
             </div>
             <div className={!dragMode? 'dBox': 'dBox dragMode'}> 
                     <div className='header'>
                         <div>Order</div>
-                        <div className="tx1">City Name</div>
-                        <div className="tx2">ZipCode</div>
+                        <div className="tx1">City</div>
                         <div className='act'>Actions</div>
                     </div>
                 <DragDropContext className={!dragMode? '': 'dragMode'} onDragEnd={onDragEnd} onDragStart={()=> setDragMode(true)}>

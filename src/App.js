@@ -11,6 +11,7 @@ import Settings from  './sheared/settings/settings'
 import {onAuthStateChanged,signOut,} from 'firebase/auth'
 import {auth} from './firebase-config'
 import Loading from './animations/Loading';
+import Construction from './animations/Construction';
 
 const URL = process.env.REACT_APP_BE_URL
 const devURL = process.env.REACT_APP_BE_DEV_URL
@@ -32,50 +33,50 @@ function App() {
   const [settingHasChanges,setSettingsHasChanges] = useState(false)
   const [searchAmount, setSearchAmount] = useState(0)
 
-  async function getCitiesData(uid){
-    var res = await fetch( URL +'/data/weather/foruser?uid='+ uid)
-    var data = await res.json()
-    var cities = await fetch( URL +'/data/users/user/?uid='+uid)
-    var citiesData = await cities.json()
-    var extCitiesData = []
-    citiesData[0].cityPref.forEach(e => {
-        extCitiesData.push(e.cityRef)
-    });
-    setCities(extCitiesData)  
-    setCitiesWeatherData(data)
-    setIsLoading(false)
-    console.log(`Loaded ${auth.currentUser.email} Cities`);
-  }
-  async function getDefaultCitiesData(){
-    var res = await fetch( URL +'/data/weather/foruser?uid=1')
-    var data = await res.json()
-    var cities = await fetch( URL +'/data/users/user/?uid=1')
-    var citiesData = await cities.json()
-    var extCitiesData = []
-    citiesData[0].cityPref.forEach(e => {
-        extCitiesData.push(e.cityRef)
-    });
-    setCities(extCitiesData)  
-    setCitiesWeatherData(data)
-    setIsLoading(false)
-    console.log("Loaded default Cities");
-  }
+  // async function getCitiesData(uid){
+  //   var res = await fetch( URL +'/data/weather/foruser?uid='+ uid)
+  //   var data = await res.json()
+  //   var cities = await fetch( URL +'/data/users/user/?uid='+uid)
+  //   var citiesData = await cities.json()
+  //   var extCitiesData = []
+  //   citiesData[0].cityPref.forEach(e => {
+  //       extCitiesData.push(e.cityRef)
+  //   });
+  //   setCities(extCitiesData)  
+  //   setCitiesWeatherData(data)
+  //   setIsLoading(false)
+  //   console.log(`Loaded ${auth.currentUser.email} Cities`);
+  // }
+  // async function getDefaultCitiesData(){
+  //   var res = await fetch( URL +'/data/weather/foruser?uid=1')
+  //   var data = await res.json()
+  //   var cities = await fetch( URL +'/data/users/user/?uid=1')
+  //   var citiesData = await cities.json()
+  //   var extCitiesData = []
+  //   citiesData[0].cityPref.forEach(e => {
+  //       extCitiesData.push(e.cityRef)
+  //   });
+  //   setCities(extCitiesData)  
+  //   setCitiesWeatherData(data)
+  //   setIsLoading(false)
+  //   console.log("Loaded default Cities");
+  // }
 
-  useEffect(()=>{
-      onAuthStateChanged(auth,(currentUser)=>{
-          console.log( currentUser)
-          if( auth.currentUser!= null){
-            let uid = auth.currentUser.uid
-            getCitiesData(uid)
-          }
-          else{
-            getDefaultCitiesData()
-          }
-      }
-    )
+  // useEffect(()=>{
+  //     onAuthStateChanged(auth,(currentUser)=>{
+  //         console.log( currentUser)
+  //         if( auth.currentUser!= null){
+  //           let uid = auth.currentUser.uid
+  //           getCitiesData(uid)
+  //         }
+  //         else{
+  //           getDefaultCitiesData()
+  //         }
+  //     }
+  //   )
     
 
-  },[auth])
+  // },[auth])
 
   useEffect(()=>{
     async function getCityData(c){
@@ -191,6 +192,8 @@ function App() {
     setSettingsHasChanges(e)
     console.log(e)
   }
+
+
   return (
     <>
       <Router>
@@ -201,7 +204,9 @@ function App() {
             ActivateMe={handelActive}/>
             <div className='maWtSe'>
               <Routes>
-                <Route path="/*"  element={isLoading ?<Loading/>: <HomePage cities={cities} citiesWeatherData={citiesWeatherData} searchMe={searchMe} badRequest={badRequest}/>}/>
+                <Route path="/*"  element={isLoading ?<Construction/>: <HomePage cities={cities} citiesWeatherData={citiesWeatherData} searchMe={searchMe} badRequest={badRequest}/>}/>
+                {/* <Route path="/*"  element={isLoading ?<Loading/>: <HomePage cities={cities} citiesWeatherData={citiesWeatherData} searchMe={searchMe} badRequest={badRequest}/>}/> */}
+
                 <Route path="/about" element={<About/>}/>
                 <Route path="/login" element={<LogIn/>}/>
                 <Route path="/contact" element={<Contact/>}/>

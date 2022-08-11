@@ -12,6 +12,7 @@ import {onAuthStateChanged,signOut,} from 'firebase/auth'
 import {auth} from './firebase-config'
 import Loading from './animations/Loading';
 import merge from "lodash/merge"
+import Construction from './animations/Construction';
 
 const URL = process.env.REACT_APP_BE_URL
 const URL2 = process.env.REACT_APP_BE_URL_2
@@ -77,9 +78,7 @@ function App() {
           }
       }
     )
-    
-
-  },[auth])
+     },[auth])
 
   useEffect(()=>{
     async function getCityData(c){
@@ -191,6 +190,7 @@ function App() {
     setSettingsHasChanges(e)
     console.log(e)
   }
+  
   var arr3 = [];
   for (var i=0; i<cities.length; i++) {
       arr3.push(merge(cities[i], citiesWeatherData[i]));
@@ -206,7 +206,9 @@ function App() {
             ActivateMe={handelActive}/>
             <div className='maWtSe'>
               <Routes>
-                <Route path="/*"  element={isLoading ?<Loading/>: <HomePage cities={cities} citiesWeatherData={citiesWeatherData} searchMe={searchMe} badRequest={badRequest}/>}/>
+                <Route path="/*"  element={isLoading ?<Construction/>: <HomePage cities={cities} citiesWeatherData={citiesWeatherData} searchMe={searchMe} badRequest={badRequest}/>}/>
+                {/* <Route path="/*"  element={isLoading ?<Loading/>: <HomePage cities={cities} citiesWeatherData={citiesWeatherData} searchMe={searchMe} badRequest={badRequest}/>}/> */}
+
                 <Route path="/about" element={<About/>}/>
                 <Route path="/login" element={<LogIn/>}/>
                 <Route path="/contact" element={<Contact/>}/>

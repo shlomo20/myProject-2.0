@@ -1,7 +1,8 @@
 import React from "react";
 import './zmanimCard.css'
 import candleLogo from "./assets/img/icons8-candelabra-62.png";
-import {Zmanim,}from '@hebcal/core';
+import {CalOptions, Zmanim, Location} from '@hebcal/core';
+
 
 export default function ZmanimCard(props) {
     console.log("ZmanimCardprops:  ", props);
@@ -11,7 +12,6 @@ export default function ZmanimCard(props) {
     console.log("lat:  ",  parseFloat(cd.lat),"lng:  ",  parseFloat(cd.lng));
     var zmanimData =  new Zmanim(new Date(),  parseFloat(cd.lat),parseFloat(cd.lng));
     console.log(zmanimData);
-
     
 
     const cn = zmanimData.chatzotNight();

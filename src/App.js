@@ -12,7 +12,7 @@ import {onAuthStateChanged,signOut,} from 'firebase/auth'
 import {auth} from './firebase-config'
 import Loading from './animations/Loading';
 import merge from "lodash/merge"
-import Construction from './animations/Construction';
+//import Construction from './animations/Construction';
 
 const URL = process.env.REACT_APP_BE_URL
 const URL2 = process.env.REACT_APP_BE_URL_2

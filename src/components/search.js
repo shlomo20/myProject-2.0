@@ -9,7 +9,7 @@ export function Search (props) {
     const loadOptions = async (inputValue) => {
         if (inputValue === "" || inputValue.length <= 3) {
             return {options:[] || inputValue.length < 3};
-        }
+        } 
         else {
             try{
                 const response = await fetch(`${GEO_API_URL_SEARCH}name_startsWith=${inputValue}${Un}`);
@@ -17,7 +17,7 @@ export function Search (props) {
                 return {
                     options: data.geonames.map(option => ({
                     value: {
-                        label: option.name+" , "+ `${option.adminCodes1?option.adminCodes1.ISO3166_2 : ""}`+  " "+option.countryCode,
+                        label: option.name+" , "+ `${option.adminCodes1 && option.countryCode.toUpperCase() == "US"?option.adminCodes1.ISO3166_2 : option.countryName}`,
                         name: option.name,
                         lng:option.lng ,lat: option.lat,
                         state: option.adminCodes1?option.adminCodes1.ISO3166_2 : "na" , 
@@ -26,7 +26,7 @@ export function Search (props) {
                         geonameId:option.geonameId,
                         info:""
                     },
-                    label: option.name+" , "+ `${option.adminCodes1?option.adminCodes1.ISO3166_2 : ""}`+  " "+option.countryCode,
+                    label: option.name+" , "+ `${option.adminCodes1?option.adminCodes1.ISO3166_2 : ""}`+  ", " + option.countryName,
                 }))}
             }
             catch(err){
@@ -49,7 +49,7 @@ export function Search (props) {
     }
     
     return(
-        <AsyncPaginate 
+        <AsyncPaginate className="inputF"
         placeholder="Search for a city"
         debounceTimeout={600}
         defaultOptions={true}
@@ -58,6 +58,7 @@ export function Search (props) {
         value={search}
         noOptionsMessage={(e) =>  e.inputValue.length <= 3?"keep typing... ":"No results found"}
         loadOptions={loadOptions}
+        
         />
     );
 }

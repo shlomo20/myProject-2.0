@@ -3,7 +3,7 @@ import { Un, GEO_API_URL_SEARCH } from "../API/goeApi";
 import { AsyncPaginate } from "react-select-async-paginate";
 //import { handleInputChange } from "react-select/dist/declarations/src/utils";
 
-export const Search = (() => {
+export function Search (props) {
     const [search, setSearch] = useState("");
 
     const loadOptions = async (inputValue) => {
@@ -17,11 +17,14 @@ export const Search = (() => {
                 return {
                     options: data.geonames.map(option => ({
                     value: {
-                        name: option.name, 
+                        label: option.name+" , "+ `${option.adminCodes1?option.adminCodes1.ISO3166_2 : ""}`+  " "+option.countryCode,
+                        name: option.name,
                         lng:option.lng ,lat: option.lat,
-                         state: option.adminCodes1?option.adminCodes1.ISO3166_2 : "na" , 
+                        state: option.adminCodes1?option.adminCodes1.ISO3166_2 : "na" , 
                         countryCode:option.countryCode,
-                        population:option.population
+                        population:option.population,
+                        geonameId:option.geonameId,
+                        info:""
                     },
                     label: option.name+" , "+ `${option.adminCodes1?option.adminCodes1.ISO3166_2 : ""}`+  " "+option.countryCode,
                 }))}
@@ -34,10 +37,15 @@ export const Search = (() => {
 
     const handleChange = (e) => {
         setSearch('');
-        onSearchChange(e);
-    }
-    const onSearchChange = (search) => {
-        console.log(search);
+        if(e.label == null){
+            return "";
+        }
+        if(props.submitSearch) {
+            props.submitSearch(e);
+        }
+        else if(props.submitNewCity) {
+            props.submitNewCity(e);
+        }
     }
     
     return(
@@ -52,6 +60,6 @@ export const Search = (() => {
         loadOptions={loadOptions}
         />
     );
-})
+}
 
 export default Search;

@@ -3,26 +3,29 @@ import './zmanimCard.css'
 import candleLogo from "./assets/img/icons8-candelabra-62.png";
 import {CalOptions, Zmanim, Location} from '@hebcal/core';
 
+
 export default function ZmanimCard(props) {
+    console.log("ZmanimCardprops:  ", props);
+    
+    var cd = props.cityData;
+    console.log("lat:  ",  cd.lat,"lng:  ",  cd.lng);
+    console.log("lat:  ",  parseFloat(cd.lat),"lng:  ",  parseFloat(cd.lng));
+    var zmanimData =  new Zmanim(new Date(),  parseFloat(cd.lat),parseFloat(cd.lng));
+    console.log(zmanimData);
+    
 
-    var zDate = new Date(!props.date ? new Date() : props.date);
-
-    const zmanim = Zmanim(zDate, props.longitude,props.latitude,);
-    console.log();
-
-
-    const cn = zmanim.chatzotNight();
-    const a =  zmanim.alotHaShachar();
-    const m =  zmanim.misheyakir();
-    const s =  zmanim.sunrise();
-    const szs =  zmanim.sofZmanShma();
-    const szt =  zmanim.sofZmanTfilla();
-    const c =  zmanim.chatzot();
-    const mg =  zmanim.minchaGedola();
-    const mk =  zmanim.minchaKetana();
-    const ss =  zmanim.sunset();
-    const kl =  zmanim.sunset().getTime() - 60000 * 15 ;
-    const t72 =  zmanim.tzeit72min();
+    const cn = zmanimData.chatzotNight();
+    const a = zmanimData.alotHaShachar();
+    const m = zmanimData.misheyakir();
+    const s = zmanimData.sunrise();
+    const szs = zmanimData.sofZmanShma();
+    const szt = zmanimData.sofZmanTfilla();
+    const c = zmanimData.chatzot();
+    const mg = zmanimData.minchaGedola();
+    const mk = zmanimData.minchaKetana();
+    const ss = zmanimData.sunset();
+    const kl = new Date(ss.getTime() - 60000 * 15 );
+    const t72 = new Date(ss.getTime() + 60000 * 72 );
     const chatzotNightT = cn.toLocaleTimeString('en-US');
     const alotHaShacharT = a.toLocaleTimeString('en-US');
     const misheyakirT = m.toLocaleTimeString('en-US');

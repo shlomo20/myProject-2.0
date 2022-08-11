@@ -18,42 +18,29 @@ import Search from './components/search'
     }
 
   },[props.badRequest])
-
-
-
-  function handelSearchData(e){
-      const {value, name } = e.target;
-      setSearchData(prev =>({
-          ...prev, [name]: value
-      }))
-  }
   
-  var arr3 = [];
-  for (var i=0; i<props.cities.length; i++) {
-      arr3.push(merge(props.cities[i], props.citiesWeatherData[i]));
-      
-  }
+  // var arr3 = [];
+  // for (var i=0; i<props.cities.length; i++) {
+  //     arr3.push(merge(props.cities[i], props.citiesWeatherData[i]));
+  // }
 
   //console.log(arr3);
-
+  console.log("props Cities: " + JSON.stringify(props.cities));
   const weatherDataEl = props.cities.map(el => {
     if(el.currentConditions  !== undefined){
       const { humidity,precip,comment,iconURL } = el.currentConditions;
       const { f } = el.currentConditions.temp;
       const { mile } = el.currentConditions.wind;
       return(
-        <Link key={el.zip} to={`/c/${el.name}`} state={el}><MainCard key={el.zip} info={el.info} cityName={el.name } temp={f} icon={iconURL} humidity={humidity} speed={mile} description={comment}/></Link> 
+        <Link key={el.geonameId} to={`/c/${el.name}`} state={el}><MainCard key={el.geonameId} info={el.info} cityName={el.label} temp={f} icon={iconURL} humidity={humidity} speed={mile} description={comment}/></Link> 
        )
     }
   })  
-  function onlyNumbers(str) {
-    return /^[0-9.,]+$/.test(str);
-  }
-  function submitSearch (e){
-    e.preventDefault();
-    function a (){ props.searchMe(searchData.search)};
-    a();
-    setSearchData("")
+
+  function submitSearch (value){
+    function a (){ props.searchMe(value)};
+     a();
+    console.log("hit submitSearch" + "  " + JSON.stringify(value.value));
   }
 
   return(
@@ -69,7 +56,7 @@ import Search from './components/search'
         to a zipcode or double check your zipcode has  5 digits </div>:""}       
     </div> */}
     <div className="search">
-      <Search/>
+      <Search submitSearch={submitSearch}/>
     </div>
     <div className='mainContent'>
       {weatherDataEl}

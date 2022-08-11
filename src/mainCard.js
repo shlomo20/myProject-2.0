@@ -6,7 +6,7 @@ export default function Card(props)
 {  
     const location = useLocation()
      const p = useParams()
-    console.log("l: "+ location + " p: "+ p);
+    console.log("Card :  useLocation: "+ location + " useParams: "+ p);
 
     return(
      <button className="card">

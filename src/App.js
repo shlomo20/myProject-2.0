@@ -206,8 +206,8 @@ function App() {
             ActivateMe={handelActive}/>
             <div className='maWtSe'>
               <Routes>
-                <Route path="/*"  element={isLoading ?<Construction/>: <HomePage cities={cities} citiesWeatherData={citiesWeatherData} searchMe={searchMe} badRequest={badRequest}/>}/>
-                {/* <Route path="/*"  element={isLoading ?<Loading/>: <HomePage cities={cities} citiesWeatherData={citiesWeatherData} searchMe={searchMe} badRequest={badRequest}/>}/> */}
+                {/* <Route path="/*"  element={isLoading ?<Construction/>: <HomePage cities={cities} citiesWeatherData={citiesWeatherData} searchMe={searchMe} badRequest={badRequest}/>}/> */}
+                <Route path="/*"  element={isLoading ?<Loading/>: <HomePage cities={cities} citiesWeatherData={citiesWeatherData} searchMe={searchMe} badRequest={badRequest}/>}/>
 
                 <Route path="/about" element={<About/>}/>
                 <Route path="/login" element={<LogIn/>}/>

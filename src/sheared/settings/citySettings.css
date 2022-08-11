@@ -4,8 +4,9 @@
     flex-direction: column;
 }
 
-.addCity{
-
+.addCity {
+    margin-bottom: 40px;
+    color: #000000;
 }
 .dBox{
     margin: 50px 0px 50px 0px;

@@ -55,7 +55,7 @@ import Search from './components/search'
         we are working on adding search by city, please change your search 
         to a zipcode or double check your zipcode has  5 digits </div>:""}       
     </div> */}
-    <div className="search">
+    <div className="searchMain">
       <Search submitSearch={submitSearch}/>
     </div>
     <div className='mainContent'>

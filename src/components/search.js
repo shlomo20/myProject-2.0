@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { Un, GEO_API_URL_SEARCH } from "../API/goeApi";
 import { AsyncPaginate } from "react-select-async-paginate";
+import "././search.css";
 //import { handleInputChange } from "react-select/dist/declarations/src/utils";
 
 export function Search (props) {
@@ -49,7 +50,8 @@ export function Search (props) {
     }
     
     return(
-        <AsyncPaginate className="inputF"
+        <AsyncPaginate 
+        className="searchB"
         placeholder="Search for a city"
         debounceTimeout={600}
         defaultOptions={true}

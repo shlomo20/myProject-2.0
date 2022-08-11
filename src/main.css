@@ -52,13 +52,15 @@
     padding: 25px;
     display: flex;
   }
-  .search {
+  .searchMain {
     display: flex;
     align-items: center;
     justify-content: center;
     border-top: 50px solid #0000;
     flex-direction: column;
-    width: 100%;
+    width: 65%;
+    margin-bottom: 40px;
+  
   }
   .button {
     border: none;

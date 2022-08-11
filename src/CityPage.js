@@ -7,7 +7,7 @@ export default function CityPage(props)
 {  
     let ref = useRef(null);
 
-    const [zmanimData, setZmanimData] = useState([])
+    //const [zmanimData, setZmanimData] = useState([])
     const [scrollEnd, setScrollEnd] = useState(false);
     const [scrollX, setScrollX] = useState(0);
     const location = useLocation(null)
@@ -16,15 +16,15 @@ export default function CityPage(props)
 
     useEffect(() => {props.ActivateMe(ls.name); }, []);
 
-    useEffect(() => {
-        async function getZmanimData(c){
-            console.log(c);
-            var res = await fetch('https://websrapjs.vercel.app/data/zmanim/'+c)
-            var data = await res.json()
-            setZmanimData(prev => ([...prev,data]))
-        }
-        getZmanimData(ls.zip);
-    }, []);
+    // useEffect(() => {
+    //     async function getZmanimData(c){
+    //         console.log(c);
+    //         var res = await fetch('https://websrapjs.vercel.app/data/zmanim/'+c)
+    //         var data = await res.json()
+    //         setZmanimData(prev => ([...prev,data]))
+    //     }
+    //     getZmanimData(ls.zip);
+    // }, []);
 
     var forecast = ls.next_days.map(el => {    
         const {day, comment, iconURL} = el;
@@ -40,12 +40,7 @@ export default function CityPage(props)
             </div>
         )
     })
-    var z = () => {
-        if(zmanimData.length > 0){
-        return(
-            <ZmanimCard zmanimData={zmanimData[0]}/>
-        )}
-    }
+
     var scroll =(shift) => {
         ref.current.scrollLeft += shift;
         setScrollX(scrollX + shift);
@@ -84,10 +79,10 @@ export default function CityPage(props)
                 </div >)}
             </div>
             <div className='zmanimBox'>
-                {z()}
+                <ZmanimCard cityData={ls}/>
             </div>
             <div className='footer'>    
-                <p>zmanim from :</p> Hebcal.com <p></p>
+                <p>zmanim from :</p> <a src="https://github.com/hebcal/hebcal-es6#Zmanim">hebcal</a> <p></p>
             </div>
         </section>
 

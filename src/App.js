@@ -11,10 +11,11 @@ import Settings from  './sheared/settings/settings'
 import {onAuthStateChanged,signOut,} from 'firebase/auth'
 import {auth} from './firebase-config'
 import Loading from './animations/Loading';
+import merge from "lodash/merge"
 import Construction from './animations/Construction';
 
 const URL = process.env.REACT_APP_BE_URL
-const devURL = process.env.REACT_APP_BE_DEV_URL
+const URL2 = process.env.REACT_APP_BE_URL_2
 
 function App() { 
 
@@ -33,59 +34,61 @@ function App() {
   const [settingHasChanges,setSettingsHasChanges] = useState(false)
   const [searchAmount, setSearchAmount] = useState(0)
 
-  // async function getCitiesData(uid){
-  //   var res = await fetch( URL +'/data/weather/foruser?uid='+ uid)
-  //   var data = await res.json()
-  //   var cities = await fetch( URL +'/data/users/user/?uid='+uid)
-  //   var citiesData = await cities.json()
-  //   var extCitiesData = []
-  //   citiesData[0].cityPref.forEach(e => {
-  //       extCitiesData.push(e.cityRef)
-  //   });
-  //   setCities(extCitiesData)  
-  //   setCitiesWeatherData(data)
-  //   setIsLoading(false)
-  //   console.log(`Loaded ${auth.currentUser.email} Cities`);
-  // }
-  // async function getDefaultCitiesData(){
-  //   var res = await fetch( URL +'/data/weather/foruser?uid=1')
-  //   var data = await res.json()
-  //   var cities = await fetch( URL +'/data/users/user/?uid=1')
-  //   var citiesData = await cities.json()
-  //   var extCitiesData = []
-  //   citiesData[0].cityPref.forEach(e => {
-  //       extCitiesData.push(e.cityRef)
-  //   });
-  //   setCities(extCitiesData)  
-  //   setCitiesWeatherData(data)
-  //   setIsLoading(false)
-  //   console.log("Loaded default Cities");
-  // }
-
-  // useEffect(()=>{
-  //     onAuthStateChanged(auth,(currentUser)=>{
-  //         console.log( currentUser)
-  //         if( auth.currentUser!= null){
-  //           let uid = auth.currentUser.uid
-  //           getCitiesData(uid)
-  //         }
-  //         else{
-  //           getDefaultCitiesData()
-  //         }
-  //     }
-  //   )
+  async function getCitiesData(uid){
+    var res = await fetch( URL2 +'/data/weather/foruser?uid='+ uid)
+    var data = await res.json()
+    var cities = await fetch( URL +'/data/users/user/?uid='+uid)
+    var citiesData = await cities.json()
+    var extCitiesData = []
+    citiesData[0].cityPref.forEach(e => {
+        extCitiesData.push(e.cityRef)
+    });
+    setCities(extCitiesData)  
+    setCitiesWeatherData(data)
+    setIsLoading(false)
+    console.log(`Loaded ${auth.currentUser.email} Cities`);
     
+  }
+  async function getDefaultCitiesData(){
+    var res = await fetch( URL2 +'/data/weather/foruser?uid=1')
+    var data = await res.json()
+    var cities = await fetch( URL +'/data/users/user/?uid=1')
+    var citiesData = await cities.json()
+    var extCitiesData = []
+    citiesData[0].cityPref.forEach(e => {
+        extCitiesData.push(e.cityRef)
+    });
+    setCities(extCitiesData)  
+    setCitiesWeatherData(data)
+    setIsLoading(false)
+    console.log("Loaded default Cities");
+    
+  }
+  console.log("Cities: " + JSON.stringify(cities));
 
-  // },[auth])
+  useEffect(()=>{
+      onAuthStateChanged(auth,(currentUser)=>{
+          console.log("currentUser  " +currentUser)
+          if( auth.currentUser!= null){
+            let uid = auth.currentUser.uid
+            getCitiesData(uid)
+          }
+          else{
+            getDefaultCitiesData()
+          }
+      }
+    )
+     },[auth])
 
   useEffect(()=>{
     async function getCityData(c){
-      var req = c.zip === null ?c.name:c.zip
+      var req = c.label
       try{
-        var res = await fetch( URL +'/data/weather/'+ req )
+        console.log("req:   "+req)
+        var res = await fetch( URL2 +'/data/weather/'+ req )
         var rData = await res.json()
         setCitiesWeatherData(prev => ([...prev,rData]))
-        var reqStatus ="good" ;
+        var reqStatus ="good";
         return [reqStatus,rData];
       }
       catch{
@@ -93,21 +96,17 @@ function App() {
         return reqStatus;
       }
     }
-    function setCity(c,d){
-      if(tempCities[c].zip == null || tempCities[c].name === null ){
-       
-        const disCity = {
-          "name": d.region, 
-          "info": true, 
-          "zip": d.region.split(",")[1].replace(/[^0-9]/g,''), 
-          "country": "us"}
-        setCities(prev => ([disCity,...prev]))  
-        setSearchAmount(prev => prev + 1)
+    function setCity(city, count){
+      if(city == null){
+        setBadRequest(true)
       }
       else{
-        setCities(prev => ([...prev,tempCities[c]]))  
+        city.info = "new"
+        setCities(prev => ([city,...prev]))  
+        setSearchAmount(prev => prev + 1)
       }
-      if(c === tempCities.length - 1){
+
+      if(count === tempCities.length - 1){
         setTempCities([])
       }  
     }
@@ -121,13 +120,15 @@ function App() {
         }
         else{
           setBadRequest(false)
-          setCity(c,gcd[1]);
+          setCity(city,c);
         } 
       }
     }
     forEach();
-    console.log(tempCities)
-    console.log(citiesWeatherData)
+    console.log("tempCities: " + JSON.stringify(tempCities))
+    console.log("Cities: " + JSON.stringify(cities))
+    console.log("citiesWeatherData:  " + citiesWeatherData)
+    //console.log("citiesWeatherData:  " + JSON.stringify(citiesWeatherData))
   },[tempCities])
 
   useEffect (()=>{
@@ -177,22 +178,23 @@ function App() {
       )
   }
   function searchMe(c){
-    function onlyNumbers(str) {
-      return /^[0-9.,]+$/.test(str);
-    }
-    if(onlyNumbers(c)){
-      setTempCities([{ "name": null, "info": 222, "zip": c, "country": "us"}])
+    if(c != null){
+      setTempCities(prev => ([...prev,c.value]))
     }
     else{
-      setTempCities([{ "name": c, "info": 222, "zip": null, "country": "us"}])
+      return console.error("No city entered");
     }
-    
+
   }
   function handelSettings(e){
     setSettingsHasChanges(e)
     console.log(e)
   }
-
+  
+  var arr3 = [];
+  for (var i=0; i<cities.length; i++) {
+      arr3.push(merge(cities[i], citiesWeatherData[i]));
+  }
 
   return (
     <>

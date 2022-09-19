@@ -81,6 +81,8 @@ export default function CityPage(props)
             <div className='zmanimBox'>
                 <ZmanimCard cityData={ls}/>
             </div>
+            <div class="map"><iframe className='ifm' id="gmap_canvas" src={ `https://maps.google.com/maps?q=${ls.lat},%20${ls.lng}.&t=&z=13&ie=UTF8&iwloc=&output=embed`}
+             frameborder="0" scrolling="no" marginheight="0" marginwidth="0"></iframe></div>
             <div className='footer'>    
                 <p>zmanim from :</p> <a src="https://github.com/hebcal/hebcal-es6#Zmanim">hebcal</a> <p></p>
             </div>
